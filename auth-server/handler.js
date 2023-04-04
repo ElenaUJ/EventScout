@@ -1,3 +1,5 @@
+// Code for serverless functions here
+
 'use strict';
 
 module.exports.hello = async (event) => {
