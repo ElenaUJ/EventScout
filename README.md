@@ -18,7 +18,7 @@ EventScout is an app which helps users to research, schedule and attend events i
 
 The app is built using a test-driven development technique (TDD) and is designed as a serverless, progressive web app (PWA). It uses the Google Calendar API to retrieve upcoming events, with access authorization being handled by the serverless backend powered by AWS Lambda. This backend verifies consumer keys and issues a token that allows users to access the API.
 
-This app is still under construction.
+The app is still under construction.
 
 ## How to Run
 
