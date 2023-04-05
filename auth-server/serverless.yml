@@ -24,6 +24,6 @@ functions:
     # events that will trigger getAuthURL Lambda function to run
     events:
       - http:
-        # This is how the http event will communicate with the getAuthURL function
-        path: api/get-auth-url
-        method: get
+          # This is how the http event will communicate with the getAuthURL function
+          path: api/get-auth-url
+          method: get
