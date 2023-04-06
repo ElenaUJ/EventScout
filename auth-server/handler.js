@@ -25,6 +25,7 @@ const credentials = {
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
 
 // Creation and call of new instance of the google.auth.OAuth2 method, accepting client ID, client scredt and redirect URL as parameters
+// Question: Why is this not within the getAuthUrl function, just like in the getAccessToekn function?
 const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
@@ -58,4 +59,45 @@ module.exports.getAuthURL = async () => {
       authUrl: authUrl,
     }),
   };
+};
+
+module.exports.getAccessToken = async (event) => {
+  // Has to be done for every serverless function because there is no memory of any instancs of OAuthClient created before, even not if it was globally
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+
+  // Decoding authorization code extracted from URL query (event paramter gets passed from the AWS API gateway associated with the function, in this case info about the HTTP requiest like headers, query parameters and path parameters)
+  const code = decodeURIComponent(`${event.pathParameters.code}`);
+
+  return new Promise((resolve, reject) => {
+    // Exchange authorization code for access token with callback to be executed after the exchange
+    // Callback is an arrow function with the results as parameters: err and token, there to handle results of the exchange
+    oAuth2Client.getToken(code, (err, token) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(token);
+    });
+  })
+    .then((token) => {
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true,
+        },
+        body: JSON.stringify(token),
+      };
+    })
+    .catch((err) => {
+      console.error(err);
+      return {
+        statusCode: 500,
+        body: JSON.stringify(err),
+      };
+    });
 };
