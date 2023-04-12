@@ -101,3 +101,53 @@ module.exports.getAccessToken = async (event) => {
       };
     });
 };
+
+module.exports.getCalendarEvents = async (event) => {
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+
+  const access_token = decodeURIComponent(
+    `${event.pathParameters.access_token}`
+  );
+  // Setting the access token in the credentials
+  oAuth2Client.setCredentials({ access_token });
+
+  return new Promise((resolve, reject) => {
+    calendar.events.list(
+      {
+        calendarId: calendar_id,
+        auth: oAuth2Client,
+        timeMin: new Date().toISOString(),
+        singleEvents: true,
+        orderBy: 'startTime',
+      },
+      (err, response) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(response);
+        }
+      }
+    );
+  })
+    .then((results) => {
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true,
+        },
+        body: JSON.stringify({ events: results.data.items }),
+      };
+    })
+    .catch((err) => {
+      console.error(err);
+      return {
+        statusCode: 500,
+        body: JSON.stringify(err),
+      };
+    });
+};
