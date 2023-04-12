@@ -112,15 +112,18 @@ module.exports.getCalendarEvents = async (event) => {
   const access_token = decodeURIComponent(
     `${event.pathParameters.access_token}`
   );
-  // Setting the access token in the credentials
+  // Setting the access token in the credentials: object with just one property (if the credentials have other properties, these remain unchanged)
   oAuth2Client.setCredentials({ access_token });
 
   return new Promise((resolve, reject) => {
+    // List method on calendar events property: options object as first parameter, callback function as second
     calendar.events.list(
       {
         calendarId: calendar_id,
         auth: oAuth2Client,
+        // minimum date and time to retrieve events from: set to current
         timeMin: new Date().toISOString(),
+        // Expanding recurring events into individual instances
         singleEvents: true,
         orderBy: 'startTime',
       },
@@ -140,6 +143,7 @@ module.exports.getCalendarEvents = async (event) => {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Credentials': true,
         },
+        // events property's value set to array of event objects retireved from API, accessing data.items properties of results object
         body: JSON.stringify({ events: results.data.items }),
       };
     })
