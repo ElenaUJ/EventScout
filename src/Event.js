@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function Event() {
-  return <div></div>;
+class Event extends Component {
+  render() {
+    return <div></div>;
+  }
 }
 
 export { Event };

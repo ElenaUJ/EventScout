@@ -35,7 +35,6 @@ const oAuth2Client = new google.auth.OAuth2(
 // The first step in the OAuth process is to generate an URL to users can log in with Google and be authorized to see calendar events data
 // After logging in they will receive a code as an URL parameter
 // async keyword indicated that function will return promise
-// Question: I was trying to find out about async, and ChatGPT says it's not necessary since we don't use the await keyword and it doesn't return a promise? I find is very hard to grasp async/await, it hasnt't really been introduced at all.
 module.exports.getAuthURL = async () => {
   // oAuth2Clienthelps to seamlessly retrieve access token, refresh, retry
   // generateAuthUrl method needs access type and scope in an object
@@ -49,7 +48,6 @@ module.exports.getAuthURL = async () => {
   return {
     statusCode: 200,
     headers: {
-      // Question: According to ChatGPT I cannot set origin to * and credentials to true...
       // Any domain is allowed access
       'Access-Control-Allow-Origin': '*',
       // Allows credentials to be send in cross-origin requests

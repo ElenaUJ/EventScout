@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function CitySearch() {
-  return (
-    <div className="CitySearch">
-      <input type="text" className="city" />
-      <ul className="suggestions"></ul>
-    </div>
-  );
+class CitySearch extends Component {
+  render() {
+    return (
+      <div className="CitySearch">
+        <input type="text" className="city" />
+        <ul className="suggestions"></ul>
+      </div>
+    );
+  }
 }
 
 export { CitySearch };
