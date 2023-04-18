@@ -25,7 +25,7 @@ const credentials = {
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
 
 // Creation and call of new instance of the google.auth.OAuth2 method, accepting client ID, client scredt and redirect URL as parameters
-// Question: Why is this not within the getAuthUrl function, just like in the getAccessToekn function?
+// Only has to be done once for the getAuthURL function, that's why it's not within the scope of the function
 const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
@@ -60,7 +60,7 @@ module.exports.getAuthURL = async () => {
 };
 
 module.exports.getAccessToken = async (event) => {
-  // Has to be done for every serverless function because there is no memory of any instancs of OAuthClient created before, even not if it was globally
+  // Has to be done for every serverless function because there is no memory of any instances of OAuthClient created before, even not if it was globally
   const oAuth2Client = new google.auth.OAuth2(
     client_id,
     client_secret,
