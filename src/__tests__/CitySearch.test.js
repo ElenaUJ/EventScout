@@ -69,7 +69,7 @@ describe('<CitySearch /> component', () => {
     expect(CitySearchWrapper.state('suggestions')).toEqual(filteredLocations);
   });
 
-  test('selecting a sugestion should change query state', () => {
+  test('selecting a suggestion should change query state', () => {
     CitySearchWrapper.setState({ query: 'Berlin' });
     const suggestions = CitySearchWrapper.state('suggestions');
     CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
