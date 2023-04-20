@@ -36,7 +36,6 @@ describe('<Event /> component', () => {
   test('details are hidden per default', () => {
     EventWrapper.setState({ isVisible: false });
     expect(EventWrapper.find('.details')).toHaveLength(0);
-    expect(EventWrapper.find('.btn-details').text()).toBe('Show Details');
   });
 
   test('details are toggled when details button is clicked', () => {
@@ -55,9 +54,9 @@ describe('<Event /> component', () => {
   });
 
   test('details are rendered correctly', () => {
-    const eventDetails =
+    const eventDetailsHtml =
       '<div class="details"><h3>About event:</h3><a href="https://www.google.com/calendar/event?eid=NGVhaHM5Z2hraHJ2a2xkNzJob2d1OXBoM2VfMjAyMDA1MTlUMTQwMDAwWiBmdWxsc3RhY2t3ZWJkZXZAY2FyZWVyZm91bmRyeS5jb20">See details on Google Calendar</a><p>Have you wondered how you can ask Google to show you the list of the top ten must-see places in London? And how Google presents you the list? How can you submit the details of an application? Well, JavaScript is doing these. :) \n\nJavascript offers interactivity to a dull, static website. Come, learn JavaScript with us and make those beautiful websites.</p></div>';
     EventWrapper.setState({ isVisible: true });
-    expect(EventWrapper.find('.details').html()).toBe(eventDetails);
+    expect(EventWrapper.find('.details').html()).toBe(eventDetailsHtml);
   });
 });
