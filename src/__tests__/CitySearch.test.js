@@ -10,7 +10,9 @@ describe('<CitySearch /> component', () => {
   let CitySearchWrapper;
   beforeAll(() => {
     locations = extractLocations(mockData);
-    CitySearchWrapper = shallow(<CitySearch locations={locations} />);
+    CitySearchWrapper = shallow(
+      <CitySearch locations={locations} updateEvents={() => {}} />
+    );
   });
 
   // Looking for an element with the CSS class `city`
@@ -46,7 +48,7 @@ describe('<CitySearch /> component', () => {
       // +1 because "see all cities" will be added
       suggestions.length + 1
     );
-    // Question: Why not forEach?
+    // For loops better for testing than forEach because index can be accessed
     for (let i = 0; i < suggestions.length; i += 1) {
       expect(CitySearchWrapper.find('.suggestions li').at(i).text()).toBe(
         suggestions[i]

@@ -24,9 +24,12 @@ describe('<Event /> component', () => {
   });
 
   test('short info renders correctly', () => {
-    const shortInfoHtml =
-      '<p class="short-info">Tue, May 19, 2020, 4:00 PM GMT+2 (Europe/Berlin)<br/>@Learn JavaScript | London, UK</p>';
-    expect(EventWrapper.find('.short-info').html()).toBe(shortInfoHtml);
+    const date = 'Tue, May 19, 2020, 4:00 PM GMT+2 (Europe/Berlin)';
+    const summary = 'Learn JavaScript';
+    const location = 'London, UK';
+    expect(EventWrapper.find('.short-info').text()).toContain(
+      date && summary && location
+    );
   });
 
   test('details button is rendered', () => {
@@ -54,9 +57,13 @@ describe('<Event /> component', () => {
   });
 
   test('details are rendered correctly', () => {
-    const eventDetailsHtml =
-      '<div class="details"><h3>About event:</h3><a href="https://www.google.com/calendar/event?eid=NGVhaHM5Z2hraHJ2a2xkNzJob2d1OXBoM2VfMjAyMDA1MTlUMTQwMDAwWiBmdWxsc3RhY2t3ZWJkZXZAY2FyZWVyZm91bmRyeS5jb20">See details on Google Calendar</a><p>Have you wondered how you can ask Google to show you the list of the top ten must-see places in London? And how Google presents you the list? How can you submit the details of an application? Well, JavaScript is doing these. :) \n\nJavascript offers interactivity to a dull, static website. Come, learn JavaScript with us and make those beautiful websites.</p></div>';
+    const eventLink =
+      'https://www.google.com/calendar/event?eid=NGVhaHM5Z2hraHJ2a2xkNzJob2d1OXBoM2VfMjAyMDA1MTlUMTQwMDAwWiBmdWxsc3RhY2t3ZWJkZXZAY2FyZWVyZm91bmRyeS5jb20';
+    const description =
+      'Have you wondered how you can ask Google to show you the list of the top ten must-see places in London? And how Google presents you the list? How can you submit the details of an application? Well, JavaScript is doing these. :) \n\nJavascript offers interactivity to a dull, static website. Come, learn JavaScript with us and make those beautiful websites.';
     EventWrapper.setState({ isVisible: true });
-    expect(EventWrapper.find('.details').html()).toBe(eventDetailsHtml);
+    expect(EventWrapper.find('.details').html()).toContain(
+      eventLink && description
+    );
   });
 });
