@@ -1,4 +1,5 @@
 // To handle API calls
+import axios from 'axios';
 import { mockData } from './mock-data.js';
 
 export const extractLocations = (events) => {
