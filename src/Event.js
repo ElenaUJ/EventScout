@@ -5,12 +5,12 @@ class Event extends Component {
     super();
 
     this.state = {
-      isVisible: false,
+      showDetails: false,
     };
   }
 
   toggleDetails = () => {
-    this.setState((prevState) => ({ isVisible: !prevState.isVisible }));
+    this.setState((prevState) => ({ showDetails: !prevState.showDetails }));
   };
 
   render() {
@@ -37,7 +37,7 @@ class Event extends Component {
           {startTime} ({event.start.timeZone})
           <br />@{event.summary} | {event.location}
         </p>
-        {this.state.isVisible ? (
+        {this.state.showDetails ? (
           <div className="details">
             <h3>About event:</h3>
             <a href={event.htmlLink}>See details on Google Calendar</a>
@@ -45,7 +45,7 @@ class Event extends Component {
           </div>
         ) : null}
         <button className="btn-details" onClick={this.toggleDetails}>
-          {this.state.isVisible ? 'Hide Details' : 'Show Details'}
+          {this.state.showDetails ? 'Hide Details' : 'Show Details'}
         </button>
       </div>
     );
