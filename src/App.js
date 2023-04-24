@@ -28,6 +28,7 @@ class App extends Component {
 
   componentDidMount() {
     this.mounted = true;
+    // The state is only set when the component is mounted, so there is time for the fetch call to be completed
     getEvents().then((events) => {
       if (this.mounted) {
         this.setState({
