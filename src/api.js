@@ -61,7 +61,7 @@ export const getEvents = async () => {
   // Start progress bar
   NProgress.start();
 
-  if (window.location.href.startsWith('https://localhost')) {
+  if (window.location.href.startsWith('http://localhost')) {
     return mockData;
   }
 

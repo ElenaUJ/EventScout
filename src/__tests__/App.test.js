@@ -29,7 +29,7 @@ describe('<App /> component', () => {
 
 // Separating integration tests from unit tests (best practice)
 describe('<App /> integration', () => {
-  test('App passes "events state as a prop to EventList', () => {
+  test('App passes "events" state as a prop to EventList', () => {
     const AppWrapper = mount(<App />);
     const AppEventsState = AppWrapper.state('events');
     // Step necessary because if both App state and EventList prop could both be undefined
@@ -78,6 +78,19 @@ describe('<App /> integration', () => {
     await suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
     expect(AppWrapper.state('events')).toEqual(allEvents);
+    AppWrapper.unmount();
+  });
+
+  test('NumberOfEvents eventCount state change also updates state in App component', () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.setState({ eventCount: '32' });
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    const eventObject = { target: { value: '1' } };
+    NumberOfEventsWrapper.find('.number-of-events').simulate(
+      'change',
+      eventObject
+    );
+    expect(AppWrapper.state('eventCount')).toBe('1');
     AppWrapper.unmount();
   });
 });

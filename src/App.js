@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       events: [],
       locations: [],
+      eventCount: '32',
     };
   }
 
@@ -24,6 +25,10 @@ class App extends Component {
           : events.filter((event) => event.location === location);
       this.setState({ events: locationEvents });
     });
+  };
+
+  updateEventCount = (eventCount) => {
+    this.setState({ eventCount: eventCount });
   };
 
   componentDidMount() {
@@ -50,7 +55,7 @@ class App extends Component {
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
-        <NumberOfEvents />
+        <NumberOfEvents updateEventCount={this.updateEventCount} />
         <EventList events={this.state.events} />
       </div>
     );

@@ -5,19 +5,17 @@ class NumberOfEvents extends Component {
     super();
 
     this.state = {
-      query: '32',
+      query: 32,
     };
   }
 
   handleInputChanged = (event) => {
     const input = event.target.value;
+    const query = isNaN(input) ? 32 : input > 100 ? 100 : input < 1 ? 1 : input;
     this.setState({
-      query: isNaN(parseInt(input))
-        ? '32'
-        : parseInt(input) > 100
-        ? '100'
-        : input,
+      query: query,
     });
+    // this.props.updateEventCount(input);
   };
 
   render() {
