@@ -81,16 +81,16 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
-  test('NumberOfEvents eventCount state change also updates state in App component', () => {
+  test('NumberOfEvents value change updates eventCount state in App component', () => {
     const AppWrapper = mount(<App />);
-    AppWrapper.setState({ eventCount: '32' });
+    const AppWrapperEventCountState = AppWrapper.state('eventCount');
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    const eventObject = { target: { value: '1' } };
+    const eventObject = { target: { value: 20 } };
     NumberOfEventsWrapper.find('.number-of-events').simulate(
       'change',
       eventObject
     );
-    expect(AppWrapper.state('eventCount')).toBe('1');
+    expect(AppWrapperEventCountState).toBe(20);
     AppWrapper.unmount();
   });
 });

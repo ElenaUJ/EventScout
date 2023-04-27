@@ -13,22 +13,18 @@ class App extends Component {
     this.state = {
       events: [],
       locations: [],
-      eventCount: '32',
+      eventCount: 32,
     };
   }
 
-  updateEvents = (location) => {
+  updateEvents = (location, eventCount) => {
     getEvents().then((events) => {
       const locationEvents =
         location === 'all'
           ? events
           : events.filter((event) => event.location === location);
-      this.setState({ events: locationEvents });
+      this.setState({ events: locationEvents, eventCount: eventCount });
     });
-  };
-
-  updateEventCount = (eventCount) => {
-    this.setState({ eventCount: eventCount });
   };
 
   componentDidMount() {
@@ -55,7 +51,7 @@ class App extends Component {
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
-        <NumberOfEvents updateEventCount={this.updateEventCount} />
+        <NumberOfEvents updateEvents={this.updateEvents} />
         <EventList events={this.state.events} />
       </div>
     );
