@@ -15,7 +15,7 @@ class NumberOfEvents extends Component {
     this.setState({
       query: query,
     });
-    this.props.updateEvents(null, this.state.query);
+    this.props.updateEvents(this.props.locations, this.state.query);
   };
 
   render() {
