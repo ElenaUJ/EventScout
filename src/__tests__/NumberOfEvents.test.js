@@ -5,7 +5,9 @@ import { NumberOfEvents } from '../NumberOfEvents.js';
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper;
   beforeAll(() => {
-    NumberOfEventsWrapper = shallow(<NumberOfEvents />);
+    NumberOfEventsWrapper = shallow(
+      <NumberOfEvents updateEventCountState={() => {}} />
+    );
   });
 
   test('render text input', () => {
