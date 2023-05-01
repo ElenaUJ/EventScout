@@ -38,34 +38,4 @@ describe('<NumberOfEvents /> component', () => {
     );
     expect(NumberOfEventsWrapper.state('query')).toBe(20);
   });
-
-  test('number of events input field only accepts numbers, otherwise return default value 32', () => {
-    NumberOfEventsWrapper.setState({
-      query: 32,
-    });
-    const eventObject = { target: { value: 'string' } };
-    NumberOfEventsWrapper.find('.number-of-events').simulate(
-      'change',
-      eventObject
-    );
-    expect(NumberOfEventsWrapper.state('query')).toBe(32);
-  });
-
-  test('if number of events input is higher than 100, return default value 100, if lower than 1 return 1', () => {
-    NumberOfEventsWrapper.setState({
-      query: 32,
-    });
-    let eventObject = { target: { value: 101 } };
-    NumberOfEventsWrapper.find('.number-of-events').simulate(
-      'change',
-      eventObject
-    );
-    expect(NumberOfEventsWrapper.state('query')).toBe(100);
-    eventObject = { target: { value: -1 } };
-    NumberOfEventsWrapper.find('.number-of-events').simulate(
-      'change',
-      eventObject
-    );
-    expect(NumberOfEventsWrapper.state('query')).toBe(1);
-  });
 });

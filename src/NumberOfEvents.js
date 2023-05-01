@@ -11,10 +11,10 @@ class NumberOfEvents extends Component {
 
   handleInputChanged = (event) => {
     const input = event.target.value;
-    const query = isNaN(input) ? 32 : input > 100 ? 100 : input < 1 ? 1 : input;
     this.setState({
-      query: query,
+      query: input,
     });
+    const query = input > 100 ? 100 : input < 1 ? 32 : input;
     this.props.updateEventCountState(query);
   };
 

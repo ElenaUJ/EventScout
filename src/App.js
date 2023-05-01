@@ -31,6 +31,7 @@ class App extends Component {
     });
   };
 
+  // Question: Is it ok this way? I know in the curriculum they said updateEvents should take both eventCount and location parameters, but doesn't it work this way, too?
   updateEventCountState = (eventCount) => {
     this.setState({ eventCount: eventCount });
     this.updateEvents(this.state.currentLocation);
