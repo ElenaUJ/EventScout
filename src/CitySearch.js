@@ -48,7 +48,8 @@ class CitySearch extends Component {
           {this.state.suggestions.map((suggestion) => (
             <li
               key={suggestion}
-              // Since I am passing an argument I have to define listener with arrow function
+              // Event listener has to be defined with arrow function because argument is passed in
+              onClick={() => this.handleItemClicked(suggestion)}
             >
               {suggestion}
             </li>

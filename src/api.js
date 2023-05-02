@@ -98,7 +98,7 @@ export const getAccessToken = async () => {
     const code = await searchParams.get('code');
 
     if (!code) {
-      // If there is no code, user is redurected to google authorization screen
+      // If there is no code, user is redirected to google authorization screen
       const results = await axios.get(
         'https://0mf3lzz5mc.execute-api.ca-central-1.amazonaws.com/dev/api/get-auth-url'
       );
