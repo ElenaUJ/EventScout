@@ -22,7 +22,7 @@ class NumberOfEvents extends Component {
     return (
       <div>
         <input
-          className="number-of-events"
+          className="numberOfEvents"
           type="number"
           value={this.state.query}
           onChange={this.handleInputChanged}

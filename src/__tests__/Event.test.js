@@ -12,11 +12,11 @@ describe('<Event /> component', () => {
   });
 
   test('event item renders event title', () => {
-    expect(EventWrapper.find('.title')).toHaveLength(1);
+    expect(EventWrapper.find('.name')).toHaveLength(1);
   });
 
   test('render correct title for event', () => {
-    expect(EventWrapper.find('.title').text()).toBe('Learn JavaScript');
+    expect(EventWrapper.find('.name').text()).toBe('Learn JavaScript');
   });
 
   test('event item renders short info', () => {
@@ -33,7 +33,7 @@ describe('<Event /> component', () => {
   });
 
   test('details button is rendered', () => {
-    expect(EventWrapper.find('.btn-details')).toHaveLength(1);
+    expect(EventWrapper.find('.details-btn')).toHaveLength(1);
   });
 
   test('details are hidden per default', () => {
@@ -43,17 +43,17 @@ describe('<Event /> component', () => {
 
   test('details are toggled when details button is clicked', () => {
     EventWrapper.setState({ showDetails: false });
-    EventWrapper.find('.btn-details').simulate('click');
+    EventWrapper.find('.details-btn').simulate('click');
     expect(EventWrapper.find('.details')).toHaveLength(1);
-    EventWrapper.find('.btn-details').simulate('click');
+    EventWrapper.find('.details-btn').simulate('click');
     expect(EventWrapper.find('.details')).toHaveLength(0);
   });
 
   test('button text toggles depending on details visibility', () => {
     EventWrapper.setState({ showDetails: false });
-    expect(EventWrapper.find('.btn-details').text()).toBe('Show Details');
+    expect(EventWrapper.find('.details-btn').text()).toBe('Show Details');
     EventWrapper.setState({ showDetails: true });
-    expect(EventWrapper.find('.btn-details').text()).toBe('Hide Details');
+    expect(EventWrapper.find('.details-btn').text()).toBe('Hide Details');
   });
 
   test('details are rendered correctly', () => {

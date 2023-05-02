@@ -32,19 +32,19 @@ class Event extends Component {
 
     return (
       <div>
-        <h2 className="title">{event.summary}</h2>
+        <h2 className="name">{event.summary}</h2>
         <p className="short-info">
           {startTime} ({event.start.timeZone})
           <br />@{event.summary} | {event.location}
         </p>
         {this.state.showDetails ? (
           <div className="details">
-            <h3>About event:</h3>
-            <a href={event.htmlLink}>See details on Google Calendar</a>
+            <h4>About the event:</h4>
             <p>{event.description}</p>
+            <a href={event.htmlLink}>See details on Google Calendar</a>
           </div>
         ) : null}
-        <button className="btn-details" onClick={this.toggleDetails}>
+        <button className="details-btn" onClick={this.toggleDetails}>
           {this.state.showDetails ? 'Hide Details' : 'Show Details'}
         </button>
       </div>

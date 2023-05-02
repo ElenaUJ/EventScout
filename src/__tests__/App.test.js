@@ -85,7 +85,7 @@ describe('<App /> integration', () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: 20 } };
-    NumberOfEventsWrapper.find('.number-of-events').simulate(
+    NumberOfEventsWrapper.find('.numberOfEvents').simulate(
       'change',
       eventObject
     );
@@ -98,7 +98,7 @@ describe('<App /> integration', () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: 101 } };
-    NumberOfEventsWrapper.find('.number-of-events').simulate(
+    NumberOfEventsWrapper.find('.numberOfEvents').simulate(
       'change',
       eventObject
     );
@@ -111,7 +111,7 @@ describe('<App /> integration', () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: -1 } };
-    NumberOfEventsWrapper.find('.number-of-events').simulate(
+    NumberOfEventsWrapper.find('.numberOfEvents').simulate(
       'change',
       eventObject
     );
@@ -120,23 +120,24 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
-  // Question: Not sure if this test is set up wisely or if I am missing a point... I did not include the location part for the final events state since this was tested before. Is that ok?
   // Question: I could only get that test to pass with the timeout. The await keyword wasn't enough because it only waited until the getEvents() promise was resolved. Is there a better way to handle this?
   test('Number of events passed to EventList matches eventCount set by the user', async () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: 2 } };
-    NumberOfEventsWrapper.find('.number-of-events').simulate(
+    NumberOfEventsWrapper.find('.numberOfEvents').simulate(
       'change',
       eventObject
     );
     const AppEventCountState = AppWrapper.state('eventCount');
     await AppWrapper.instance().updateEvents('all');
-    setTimeout(async () => {
-      const AppEventsState = AppWrapper.state('events');
-      expect(AppEventsState).toHaveLength(AppEventCountState);
-      expect(AppEventsState).toEqual(mockData.slice(0, AppEventCountState));
-      AppWrapper.unmount();
-    }, 1000);
+    // Waiting for setState to update the events
+    await Promise.resolve();
+    // Updating component with new state
+    AppWrapper.update();
+    const AppEventsState = AppWrapper.state('events');
+    expect(AppEventsState).toHaveLength(AppEventCountState);
+    expect(AppEventsState).toEqual(mockData.slice(0, AppEventCountState));
+    AppWrapper.unmount();
   });
 });

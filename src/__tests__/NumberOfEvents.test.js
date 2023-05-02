@@ -11,18 +11,18 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('render text input', () => {
-    expect(NumberOfEventsWrapper.find('.number-of-events')).toHaveLength(1);
+    expect(NumberOfEventsWrapper.find('.numberOfEvents')).toHaveLength(1);
   });
 
   test('default number of events is 32', () => {
-    expect(NumberOfEventsWrapper.find('.number-of-events').prop('value')).toBe(
+    expect(NumberOfEventsWrapper.find('.numberOfEvents').prop('value')).toBe(
       32
     );
   });
 
   test('renders number input correctly', () => {
     const query = NumberOfEventsWrapper.state('query');
-    expect(NumberOfEventsWrapper.find('.number-of-events').prop('value')).toBe(
+    expect(NumberOfEventsWrapper.find('.numberOfEvents').prop('value')).toBe(
       query
     );
   });
@@ -32,7 +32,7 @@ describe('<NumberOfEvents /> component', () => {
       query: 32,
     });
     const eventObject = { target: { value: 20 } };
-    NumberOfEventsWrapper.find('.number-of-events').simulate(
+    NumberOfEventsWrapper.find('.numberOfEvents').simulate(
       'change',
       eventObject
     );
