@@ -48,8 +48,7 @@ class CitySearch extends Component {
           {this.state.suggestions.map((suggestion) => (
             <li
               key={suggestion}
-              // Question: Why is the event listener defined using an arrow function here (and below), but not in the above onChange listener of the input element? What's the difference?
-              onClick={() => this.handleItemClicked(suggestion)}
+              // Since I am passing an argument I have to define listener with arrow function
             >
               {suggestion}
             </li>

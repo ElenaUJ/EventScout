@@ -34,8 +34,7 @@ describe('<App /> integration', () => {
     const AppEventsState = AppWrapper.state('events');
     // Step necessary because if both App state and EventList prop could both be undefined
     expect(AppEventsState).not.toEqual(undefined);
-    // Question: Could I write .prop('events') instead? The test still works. That's what we did in one CitySearch unit test.
-    expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
+    expect(AppWrapper.find(EventList).prop('events')).toEqual(AppEventsState);
     // Important to unmount because otherwise tests will affect each other
     AppWrapper.unmount();
   });
@@ -120,7 +119,6 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
-  // Question: I could only get that test to pass with the timeout. The await keyword wasn't enough because it only waited until the getEvents() promise was resolved. Is there a better way to handle this?
   test('Number of events passed to EventList matches eventCount set by the user', async () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
