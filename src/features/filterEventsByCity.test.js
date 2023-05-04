@@ -36,10 +36,9 @@ defineFeature(feature, (test) => {
     then,
   }) => {
     let CitySearchWrapper;
-    let locations;
     given('the main page is open', () => {
       // Question: Why don't I have to mount the App component here, if it asks for the main page to be open? Why could't I have done what I did in the first scenario?
-      locations = extractLocations(mockData);
+      const locations = extractLocations(mockData);
       CitySearchWrapper = shallow(
         <CitySearch locations={locations} updateEvents={() => {}} />
       );
@@ -91,6 +90,7 @@ defineFeature(feature, (test) => {
     and(
       'the user should receive a list of upcoming events in that city',
       () => {
+        // Question: why mockData.length? Shouldn't it be 1, if Berlin ahs been selected?
         expect(AppWrapper.find('.event')).toHaveLength(mockData.length);
       }
     );
