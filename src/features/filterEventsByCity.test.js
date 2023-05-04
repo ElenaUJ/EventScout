@@ -20,12 +20,13 @@ defineFeature(feature, (test) => {
     // Define AppWrapper outside of when-step because it will be needed later
     let AppWrapper;
     when('the user opens the app', () => {
+      // Question: Why don't I have to unmount here?
       AppWrapper = mount(<App />);
     });
     then('the user should see a list of all upcoming events', () => {
       // Because getEvents() is asynchronous
       AppWrapper.update();
-      // Question: So, do I understand it correctly, that I had to mount the App component plus its children just to be able to find the .event element?
+      // Question: So, do I understand it correctly, that I had to mount the App component plus its children (so, full vs shallow) just to be able to find the .event element?
       expect(AppWrapper.find('.event')).toHaveLength(mockData.length);
     });
   });
@@ -63,7 +64,7 @@ defineFeature(feature, (test) => {
   }) => {
     let AppWrapper;
     given('the user was typing "Berlin" in the city textbox', async () => {
-      // Question: And why do they use async/await here as opposed to the AppWrapper.update() in the first scenario? Because the next step is still within the given-statement? And why don't I just use the CitySearch component?
+      // Question: And why do they use async/await here as opposed to the AppWrapper.update() in the first scenario? Is it needed here at all? Because the next step is still within the given-statement? And why don't I just use the CitySearch component?
       AppWrapper = await mount(<App />);
       const eventObject = { target: { value: 'Berlin' } };
       AppWrapper.find('.city').simulate('change', eventObject);

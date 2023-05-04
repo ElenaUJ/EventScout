@@ -3,9 +3,7 @@ import { mount, shallow } from 'enzyme';
 import { App } from '../App.js';
 import { EventList } from '../EventList.js';
 import { Event } from '../Event.js';
-import { CitySearch } from '../CitySearch.js';
 import { mockData } from '../mock-data.js';
-import { extractLocations } from '../api.js';
 
 import { loadFeature, defineFeature } from 'jest-cucumber';
 
