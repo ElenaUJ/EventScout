@@ -29,6 +29,7 @@ describe('<App /> component', () => {
 
 // Separating integration tests from unit tests (best practice)
 describe('<App /> integration', () => {
+  // Question: I tried to mount and unmount the AppWrapper in beforeAll/afterAll functions but for some tests it started throwing errors and I don't know why. Any idea?
   test('App passes "events" state as a prop to EventList', () => {
     const AppWrapper = mount(<App />);
     const AppEventsState = AppWrapper.state('events');
