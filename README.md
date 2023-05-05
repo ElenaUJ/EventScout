@@ -103,11 +103,11 @@ Furthermore, it uses the following linting configuration:
 
 **Scenario 3: User can select a city from the suggested list.**
 **Given** the user was typing “Berlin” in the city textbox
-And the list of suggested cities is showing
+**And** the list of suggested cities is showing
 **When** the user selects a city (e.g., “Berlin, Germany”) from the list
 **Then** their city should be changed to that city (i.e., “Berlin, Germany”)
-And the list of suggestions should disappear
-And the user should receive a list of upcoming events in that city
+**And** the list of suggestions should disappear
+**And** the user should receive a list of upcoming events in that city
 
 ### Feature 2: Show/Hide an Event's Details
 
@@ -128,13 +128,13 @@ And the user should receive a list of upcoming events in that city
 **Given** the user has identified an event of interest
 **When** the user clicks on that event element
 **Then** the element should expand
-And display its details
+**And** display its details
 
 **Scenario 3: User can collapse an event to hide its details**
 **Given** the user has obtained all information they need about the event
 **When** the user clicks on that event element
 **Then** the element should collapse
-And hide its details again
+**And** hide its details again
 
 ### Feature 3: Specify Number of Events
 
