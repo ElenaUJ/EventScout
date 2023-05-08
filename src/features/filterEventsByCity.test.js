@@ -20,13 +20,11 @@ defineFeature(feature, (test) => {
     // Define AppWrapper outside of when-step because it will be needed later
     let AppWrapper;
     when('the user opens the app', () => {
-      // Question: Why don't I have to unmount here?
       AppWrapper = mount(<App />);
     });
     then('the user should see a list of all upcoming events', () => {
       // Because getEvents() is asynchronous
       AppWrapper.update();
-      // Question: So, do I understand it correctly, that I had to mount the App component plus its children (so, full vs shallow) just to be able to find the .event element?
       expect(AppWrapper.find('.event')).toHaveLength(mockData.length);
     });
   });
@@ -38,7 +36,7 @@ defineFeature(feature, (test) => {
   }) => {
     let CitySearchWrapper;
     given('the main page is open', () => {
-      // Question: Why don't I have to mount the App component here, if it asks for the main page to be open? Why could't I have done what I did in the first scenario?
+      // Since we are only testing CitySearch, I do not have to mount the App component here
       const locations = extractLocations(mockData);
       CitySearchWrapper = shallow(
         <CitySearch locations={locations} updateEvents={() => {}} />
@@ -64,14 +62,14 @@ defineFeature(feature, (test) => {
   }) => {
     let AppWrapper;
     given('the user was typing "Berlin" in the city textbox', async () => {
-      // Question: And why do they use async/await here as opposed to the AppWrapper.update() in the first scenario? Is it needed here at all? Because the next step is still within the given-statement? And why don't I just use the CitySearch component?
+      // async/await is used here, because the AppWrapper has to be fully mounted before simulating the user event
       AppWrapper = await mount(<App />);
       const eventObject = { target: { value: 'Berlin' } };
       AppWrapper.find('.city').simulate('change', eventObject);
     });
     and('the list of suggested cities is showing', () => {
       AppWrapper.update();
-      // Question: Why the use of expect there and not in the other given-statements? Because that's still part of the given-statement, right?
+      // Expect has to be used here, because condition has to be met for the next steps to be performed
       expect(AppWrapper.find('.suggestions li')).toHaveLength(2);
     });
     when(

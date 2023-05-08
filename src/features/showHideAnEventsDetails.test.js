@@ -14,7 +14,6 @@ defineFeature(feature, (test) => {
     let AppWrapper;
     given(
       'the user has just selected the city for which they wanted to browse events',
-      // Question: Not sure if the code accurately reflects my given-statement?
       async () => {
         AppWrapper = mount(<App />);
         await AppWrapper.instance().updateEvents('Berlin, Germany');
@@ -26,7 +25,6 @@ defineFeature(feature, (test) => {
       EventListWrapper = AppWrapper.find(EventList);
       expect(EventListWrapper.find('.event-list li')).toHaveLength(1);
     });
-    // Question: Not sure about this part at all, am I actually looking for the right thing?
     then('all event elements should be collapsed by default', () => {
       const EventWrapper = EventListWrapper.find(Event);
       expect(EventWrapper.find('.details')).toHaveLength(0);
