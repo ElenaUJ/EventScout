@@ -25,6 +25,3 @@ serviceWorkerRegistration.unregister();
 reportWebVitals();
 
 atatus.config('2954af4946e143aa950748bb3c11e4c4').install();
-
-// To test whether Atatus has been integrated correctly
-atatus.notify(new Error('Test Atatus Setup'));
