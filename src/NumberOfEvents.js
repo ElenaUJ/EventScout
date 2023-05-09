@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ErrorAlert } from './Alert.js';
 
 class NumberOfEvents extends Component {
   constructor() {
@@ -6,6 +7,7 @@ class NumberOfEvents extends Component {
 
     this.state = {
       query: 32,
+      errorText: '',
     };
   }
 
@@ -14,7 +16,17 @@ class NumberOfEvents extends Component {
     this.setState({
       query: input,
     });
-    const query = input > 100 ? 100 : input < 1 ? 32 : input;
+    let query;
+    if (input > 100) {
+      query = 100;
+      this.setState({ errorText: 'Please select a number between 1 and 100' });
+    } else if (input < 1) {
+      query = 32;
+      this.setState({ errorText: 'Please select a number between 1 and 100' });
+    } else {
+      query = input;
+      this.setState({ errorText: '' });
+    }
     this.props.updateEventCountState(query);
   };
 
@@ -27,6 +39,7 @@ class NumberOfEvents extends Component {
           value={this.state.query}
           onChange={this.handleInputChanged}
         ></input>
+        <ErrorAlert text={this.state.errorText} />
       </div>
     );
   }
