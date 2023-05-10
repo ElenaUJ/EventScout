@@ -159,6 +159,11 @@ input {
   text-align: center;
 }
 
+.Alert {
+  height: 50px;
+  text-align: center;
+}
+
 /* What is this? */
 .button-wrapper {
   display: grid;

@@ -23,7 +23,7 @@ const checkToken = async (accessToken) => {
 
 // To remove the code from the URL once it's been accessed
 const removeQuery = () => {
-  // Checks if browser supports HTML5 history API and if the current URL has a path (and not just domain name)
+  // Checks if browser supports HTML5 history API and if the current URL has a path (and not just domain name), otherwise the app would break if the URL was replaced
   if (window.history.pushState && window.location.pathname) {
     var newurl =
       window.location.protocol +

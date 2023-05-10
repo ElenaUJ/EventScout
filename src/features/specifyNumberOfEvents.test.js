@@ -21,10 +21,7 @@ defineFeature(feature, (test) => {
         AppWrapper = mount(<App />);
       }
     );
-    // Question: Is this even necessary here? Could I leave it empty? It doesn't do anything. Or shall I pick a city?
-    when('the user receives the list of events in that city', () => {
-      const EventListWrapper = AppWrapper.find(EventList);
-    });
+    when('the user receives the list of events in that city', () => {});
     then('a number of 32 events should be displayed by default', () => {
       expect(AppWrapper.state('eventCount')).toBe(32);
     });
@@ -40,7 +37,6 @@ defineFeature(feature, (test) => {
       AppWrapper = mount(<App />);
       AppWrapper.setState({ eventCount: 32 });
     });
-    // Question: The following now is almost exactly the same as I used in App.test.js integration testing for the NumberOfEvents component (in fact I copy/pasted most of it). Did I miss a point? If not, it seems a bit redundant?
     let NumberOfEventsWrapper;
     when('the user wants to see more or less events per city', () => {
       NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);

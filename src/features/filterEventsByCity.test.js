@@ -89,8 +89,8 @@ defineFeature(feature, (test) => {
     and(
       'the user should receive a list of upcoming events in that city',
       () => {
-        // Question: why mockData.length? Shouldn't it be 1, if Berlin ahs been selected?
-        expect(AppWrapper.find('.event')).toHaveLength(mockData.length);
+        AppWrapper.update();
+        expect(AppWrapper.find('.event')).toHaveLength(1);
       }
     );
   });
