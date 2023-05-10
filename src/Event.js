@@ -21,7 +21,7 @@ class Event extends Component {
     // Division by number of milliseconds per day to get days
     const dayDiff = timeDiff / 86400000;
 
-    if (dayDiff < 2 && dayDiff >= 0) {
+    if (dayDiff < 1 && dayDiff >= 0) {
       this.setState({ warningText: 'Hurry! Event is coming up soon.' });
     }
   }
