@@ -169,12 +169,6 @@ input {
 }
 
 /* Will I need this? */
-.Alert {
-  position: fixed;
-  top: 20px;
-}
-
-/* Will I need this? */
 .data-vis-wrapper {
   display: flex;
   align-items: center;
