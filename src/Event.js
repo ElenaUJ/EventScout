@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { WarningAlert } from './Alert.js';
 
 class Event extends Component {
   constructor() {
@@ -6,7 +7,23 @@ class Event extends Component {
 
     this.state = {
       showDetails: false,
+      warningText: '',
     };
+  }
+
+  // Current time can only be set once when the component mounts, otherwise app will crash.
+  // Still have to adjust to display the adjusted time to the current tome zone for the events though.
+  componentDidMount() {
+    const event = this.props.event;
+    const startDate = new Date(event.start.dateTime);
+    const todaysDate = new Date();
+    const timeDiff = startDate.getTime() - todaysDate.getTime();
+    // Division by number of milliseconds per day to get days
+    const dayDiff = timeDiff / 86400000;
+
+    if (dayDiff < 2 && dayDiff >= 0) {
+      this.setState({ warningText: 'Hurry! Event is coming up soon.' });
+    }
   }
 
   toggleDetails = () => {
@@ -32,7 +49,10 @@ class Event extends Component {
 
     return (
       <div>
-        <h2 className="name">{event.summary}</h2>
+        <div className="title-wrapper">
+          <h2 className="name">{event.summary}</h2>
+          <WarningAlert text={this.state.warningText} />
+        </div>
         <p className="short-info">
           {startTime} ({event.start.timeZone})
           <br />@{event.summary} | {event.location}

@@ -46,35 +46,37 @@ class CitySearch extends Component {
 
   render() {
     return (
-      <div className="CitySearch">
+      <div>
         <InfoAlert text={this.state.infoText} />
-        <input
-          className="city"
-          onChange={this.handleInputChanged}
-          onFocus={() => {
-            this.setState({ showSuggestions: true });
-          }}
-          type="text"
-          value={this.state.query}
-        />
-        <ul
-          className="suggestions"
-          style={this.state.showSuggestions ? {} : { display: 'none' }}
-        >
-          {this.state.suggestions.map((suggestion) => (
-            <li
-              className="suggestion"
-              key={suggestion}
-              // Event listener has to be defined with arrow function because argument is passed in
-              onClick={() => this.handleItemClicked(suggestion)}
-            >
-              {suggestion}
+        <div className="CitySearch">
+          <input
+            className="city"
+            onChange={this.handleInputChanged}
+            onFocus={() => {
+              this.setState({ showSuggestions: true });
+            }}
+            type="text"
+            value={this.state.query}
+          />
+          <ul
+            className="suggestions"
+            style={this.state.showSuggestions ? {} : { display: 'none' }}
+          >
+            {this.state.suggestions.map((suggestion) => (
+              <li
+                className="suggestion"
+                key={suggestion}
+                // Event listener has to be defined with arrow function because argument is passed in
+                onClick={() => this.handleItemClicked(suggestion)}
+              >
+                {suggestion}
+              </li>
+            ))}
+            <li key="all" onClick={() => this.handleItemClicked('all')}>
+              <b>See all cities</b>
             </li>
-          ))}
-          <li key="all" onClick={() => this.handleItemClicked('all')}>
-            <b>See all cities</b>
-          </li>
-        </ul>
+          </ul>
+        </div>
       </div>
     );
   }

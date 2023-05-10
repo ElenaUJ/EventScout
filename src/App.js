@@ -5,7 +5,6 @@ import { EventList } from './EventList.js';
 import { CitySearch } from './CitySearch.js';
 import { NumberOfEvents } from './NumberOfEvents';
 import { getEvents, extractLocations } from './api.js';
-import { InfoAlert } from './Alert.js';
 
 class App extends Component {
   constructor() {
