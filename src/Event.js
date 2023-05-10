@@ -40,7 +40,6 @@ class Event extends Component {
       hour: 'numeric',
       minute: 'numeric',
       timeZoneName: 'short',
-      timeZone: event.start.timeZone,
     };
     const startTime = new Date(event.start.dateTime).toLocaleString(
       'en-US',
@@ -54,7 +53,7 @@ class Event extends Component {
           <WarningAlert text={this.state.warningText} />
         </div>
         <p className="short-info">
-          {startTime} ({event.start.timeZone})
+          {startTime} (<i>your local time</i>)
           <br />@{event.summary} | {event.location}
         </p>
         {this.state.showDetails ? (
