@@ -22,7 +22,7 @@ class CitySearch extends Component {
       this.setState({
         query: value,
         infoText:
-          'We can not find the city you are looking for. Please try another city.',
+          'We cannot find the city you are looking for. Please try another city.',
       });
     } else {
       // Question: Why the return keyword here?
@@ -38,6 +38,7 @@ class CitySearch extends Component {
     this.setState({
       query: suggestion,
       showSuggestions: false,
+      infoText: '',
     });
 
     this.props.updateEvents(suggestion);
