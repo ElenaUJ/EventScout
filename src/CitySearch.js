@@ -25,7 +25,7 @@ class CitySearch extends Component {
           'We cannot find the city you are looking for. Please try another city.',
       });
     } else {
-      // Question: Why the return keyword here?
+      // The return keyword makes sure the state us updates before the next task is performed
       return this.setState({
         query: value,
         suggestions: suggestions,
