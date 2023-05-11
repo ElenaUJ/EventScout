@@ -66,6 +66,13 @@ export const getEvents = async () => {
     return mockData;
   }
 
+  // Checks if user is offline, do it before checking for token
+  if (!navigator.onLine) {
+    const data = localStorage.getItem('lastEvents');
+    NProgress.done();
+    return data ? JSON.parse(data).events : [];
+  }
+
   const token = await getAccessToken();
 
   if (token) {
@@ -78,6 +85,7 @@ export const getEvents = async () => {
 
     if (result.data) {
       var locations = extractLocations(result.data.events);
+      // Local storage can only store strings
       localStorage.setItem('lastEvents', JSON.stringify(result.data));
       localStorage.setItem('locations', JSON.stringify(locations));
     }
