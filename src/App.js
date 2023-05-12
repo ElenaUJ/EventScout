@@ -4,7 +4,13 @@ import './nprogress.css';
 import { EventList } from './EventList.js';
 import { CitySearch } from './CitySearch.js';
 import { NumberOfEvents } from './NumberOfEvents';
-import { getEvents, extractLocations } from './api.js';
+import {
+  getEvents,
+  extractLocations,
+  checkToken,
+  getAccessToken,
+} from './api.js';
+import { WelcomeScreen } from './WelcomeScreen.js';
 
 class App extends Component {
   constructor() {
@@ -15,6 +21,7 @@ class App extends Component {
       locations: [],
       eventCount: 32,
       currentLocation: 'all',
+      showWelcomeScreen: undefined,
     };
   }
 
@@ -36,18 +43,26 @@ class App extends Component {
     this.updateEvents(this.state.currentLocation);
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    // The state is only set when the component is mounted, so there is time for the fetch call to be completed
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({
-          events: events,
-          locations: extractLocations(events),
-          eventCount: 32,
-        });
-      }
-    });
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get('code');
+
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+
+    if (code || (isTokenValid && this.mounted)) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({
+            events: events,
+            locations: extractLocations(events),
+            eventCount: 32,
+          });
+        }
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -55,6 +70,9 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.showWelcomeScreen === undefined)
+      return <div className="App" />;
+
     return (
       <div className="App">
         <header className="header">
@@ -69,6 +87,12 @@ class App extends Component {
           <NumberOfEvents updateEventCountState={this.updateEventCountState} />
           <EventList events={this.state.events} />
         </div>
+        <WelcomeScreen
+          showWelcomeScreen={this.state.showWelcomeScreen}
+          getAccessToken={() => {
+            getAccessToken();
+          }}
+        />
       </div>
     );
   }
