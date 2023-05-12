@@ -201,8 +201,18 @@ input {
   overflow: visible;
 }
 
-/* Will I need this? */
-.login-button {
+/*Welcome Screen */
+.WelcomeScreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 73px;
+  background: white;
+  text-align: center;
+  padding: 1% 5%;
+}
+
+/* .login-button {
   color: #494949;
   text-transform: uppercase;
   text-decoration: none;
@@ -213,9 +223,12 @@ input {
   transition: all 0.4s ease 0s;
   min-width: 10rem;
   margin: 1rem;
+} */
+
+.button_cont {
+  margin-top: 30px;
 }
 
-/* Will I need this? */
 .google-btn {
   width: 184px;
   height: 42px;
@@ -224,12 +237,15 @@ input {
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
 }
+
 .google-btn:hover {
   box-shadow: 0 0 6px #4285f4;
 }
+
 .google-btn:active {
   background: #1669f2;
 }
+
 .google-icon-wrapper {
   position: absolute;
   margin-top: 1px;
@@ -239,6 +255,7 @@ input {
   border-radius: 2px;
   background-color: #fff;
 }
+
 .google-icon {
   position: absolute;
   margin-top: 11px;
@@ -246,13 +263,18 @@ input {
   width: 18px;
   height: 18px;
 }
+
 .btn-text {
   float: right;
-  margin: 11px 11px 0 0;
   color: #fff;
   font-size: 14px;
   letter-spacing: 0.2px;
   font-family: 'Roboto';
+  background-color: #4285f4;
+  width: 80%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
 }
 
 /* What is this? */

@@ -1,18 +1,18 @@
 import React from 'react';
-import './WelcomeScreen.css';
+import './App.css';
 
 function WelcomeScreen(props) {
   return props.showWelcomeScreen ? (
-    <div class="WelcomeScreen">
+    <div className="WelcomeScreen">
       <h1>Welcome to the EventScout App</h1>
       <h4>
         Log in to see upcoming events around the world for full-stack developers
       </h4>
-      <div class="button_cont" align="center">
-        <div class="google-btn">
-          <div class="google-icon-wrapper">
+      <div className="button_cont" align="center">
+        <div className="google-btn">
+          <div className="google-icon-wrapper">
             <img
-              class="google-icon"
+              className="google-icon"
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
               alt="Google sign-in"
             />
@@ -22,14 +22,14 @@ function WelcomeScreen(props) {
               props.getAccessToken();
             }}
             rel="nofollow noopener"
-            class="btn-text"
+            className="btn-text"
           >
             <b>Sign in with Google</b>
           </button>
         </div>
       </div>
       <a
-        href="https://elenauj.github.io/eventscout/privacy.html"
+        href="https://elenauj.github.io/EventScout/privacy.html"
         rel="nofollow noopener"
       >
         Privacy policy

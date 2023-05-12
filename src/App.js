@@ -10,7 +10,7 @@ import {
   checkToken,
   getAccessToken,
 } from './api.js';
-import { WelcomeScreen } from './WelcomeScreen.jsx';
+import { WelcomeScreen } from './WelcomeScreen.js';
 
 class App extends Component {
   constructor() {
