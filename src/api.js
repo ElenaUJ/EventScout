@@ -32,7 +32,10 @@ const removeQuery = () => {
       window.location.pathname;
     // pushState method replaces current URL with the new URL (first two parameters are stateObject and title, which we don't need)
     window.history.pushState('', '', newurl);
-    // Question: But if the browser doesn't support the HTML5 history API, it wouldn't be able to use the pushState() method, and result in an error, correct? So why does this else statements exist then? To check the path (and why would no path exist?)? Then why check for the pushState method at all? I'm confused.
+    // Question: But if the browser doesn't support the HTML5 history API, it wouldn't be able to use the pushState() method, and result in an error, correct?
+    // So why does this else statement exist then?
+    // To check the path (and why would no path exist?)?
+    // Then why check for the pushState method at all? I'm confused.
   } else {
     newurl = window.location.protocol + '//' + window.location.host;
     window.history.pushState('', '', newurl);
