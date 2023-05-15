@@ -62,7 +62,7 @@ class Event extends Component {
           ) : null}
         </div>
         <p className="short-info">
-          {startTime} (<i>your local time</i>)
+          {startTime}
           <br />@{event.summary} | {event.location}
         </p>
         {this.state.showDetails ? (
