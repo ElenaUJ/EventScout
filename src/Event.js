@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WarningAlert } from './Alert.js';
+import { WarningAlert, ErrorAlert } from './Alert.js';
 
 class Event extends Component {
   constructor() {
@@ -8,6 +8,7 @@ class Event extends Component {
     this.state = {
       showDetails: false,
       warningText: '',
+      errorText: '',
     };
   }
 
@@ -22,7 +23,11 @@ class Event extends Component {
     const dayDiff = timeDiff / 86400000;
 
     if (dayDiff < 1 && dayDiff >= 0) {
-      this.setState({ warningText: 'Hurry! Event is coming up soon.' });
+      this.setState({ warningText: 'Event is coming up soon.' });
+    }
+
+    if (dayDiff < 0) {
+      this.setState({ errorText: 'Hurry! Event has already started.' });
     }
   }
 
@@ -50,7 +55,11 @@ class Event extends Component {
       <div>
         <div className="title-wrapper">
           <h2 className="name">{event.summary}</h2>
-          <WarningAlert text={this.state.warningText} />
+          {this.state.warningText !== '' ? (
+            <WarningAlert text={this.state.warningText} />
+          ) : this.state.errorText !== '' ? (
+            <ErrorAlert text={this.state.errorText} />
+          ) : null}
         </div>
         <p className="short-info">
           {startTime} (<i>your local time</i>)

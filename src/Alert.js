@@ -43,13 +43,6 @@ class WarningAlert extends Alert {
     // Accent colour
     this.color = '#f39c12';
   }
-
-  getStyle = () => {
-    return {
-      color: this.color,
-      fontSize: '18px',
-    };
-  };
 }
 
 export { InfoAlert, ErrorAlert, WarningAlert };

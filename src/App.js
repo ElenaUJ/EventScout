@@ -70,6 +70,7 @@ class App extends Component {
   }
 
   render() {
+    // Question: According to the PDF to implement the Welcome Screen I was supposed to add these lines. However when I did, it broke my app when offline. It would just show the empty div, a white screen. So... is this line necessary at all?
     // if (this.state.showWelcomeScreen === undefined)
     //   return <div className="App" />;
 
