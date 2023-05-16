@@ -67,15 +67,6 @@ class App extends Component {
     return data;
   };
 
-  // getData = () => {
-  //   const data = [
-  //     { city: 'Berlin', number: 1 },
-  //     { city: 'London', number: 1 },
-  //   ];
-  //   console.log(data);
-  //   return data;
-  // };
-
   async componentDidMount() {
     this.mounted = true;
     // This is just for the localhost testing environment, because with the below code it wouldn't update the events state when mounted
