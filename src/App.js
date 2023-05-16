@@ -147,12 +147,12 @@ class App extends Component {
           </ResponsiveContainer>
           <EventList events={this.state.events} />
         </div>
-        {/* <WelcomeScreen
+        <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => {
             getAccessToken();
           }}
-        /> */}
+        />
       </div>
     );
   }
