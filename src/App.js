@@ -11,6 +11,15 @@ import {
   getAccessToken,
 } from './api.js';
 import { WelcomeScreen } from './WelcomeScreen.js';
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 class App extends Component {
   constructor() {
@@ -43,8 +52,35 @@ class App extends Component {
     this.updateEvents(this.state.currentLocation);
   };
 
+  getData = () => {
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter(
+        (event) => event.location === location
+      ).length;
+      // Splitting the locations at the occurrence of comma followed by space, returning an array
+      // Then, shift() method gets the first array element, which is the city name
+      const city = location.split(', ').shift();
+      return { city, number };
+    });
+    console.log(data);
+    return data;
+  };
+
   async componentDidMount() {
     this.mounted = true;
+    // This is just for the localhost testing environment, because with the below code it wouldn't update the events state when mounted
+    if (window.location.href.startsWith('http://localhost') && this.mounted) {
+      getEvents().then((events) => {
+        this.setState({
+          events: events,
+          locations: extractLocations(events),
+          eventCount: 32,
+        });
+      });
+      return;
+    }
+
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
@@ -81,19 +117,42 @@ class App extends Component {
           <div className="slogan">Stay in the Loop</div>
         </header>
         <div className="content">
+          <h4>Choose your nearest city</h4>
           <CitySearch
             locations={this.state.locations}
             updateEvents={this.updateEvents}
           />
           <NumberOfEvents updateEventCountState={this.updateEventCountState} />
+          <h4>Events in each city</h4>
+          <ResponsiveContainer height={400}>
+            <ScatterChart
+              margin={{
+                top: 20,
+                right: 20,
+                bottom: 20,
+                left: 20,
+              }}
+            >
+              <CartesianGrid />
+              <XAxis type="category" dataKey="city" name="city" />
+              <YAxis
+                type="number"
+                dataKey="number"
+                name="number of events"
+                allowDecimals={false}
+              />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Scatter data={this.getData()} fill="#8884d8" />
+            </ScatterChart>
+          </ResponsiveContainer>
           <EventList events={this.state.events} />
         </div>
-        <WelcomeScreen
+        {/* <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => {
             getAccessToken();
           }}
-        />
+        /> */}
       </div>
     );
   }

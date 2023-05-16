@@ -21,7 +21,7 @@ const mockData = [
       self: true,
     },
     start: {
-      dateTime: '2020-05-19T16:00:00+02:00',
+      dateTime: '2023-05-19T16:00:00+02:00',
       timeZone: 'Europe/Berlin',
     },
     end: {
@@ -62,7 +62,7 @@ const mockData = [
       self: true,
     },
     start: {
-      dateTime: '2020-05-20T14:00:00+02:00',
+      dateTime: '2023-05-20T14:00:00+02:00',
       timeZone: 'Europe/Berlin',
     },
     end: {
