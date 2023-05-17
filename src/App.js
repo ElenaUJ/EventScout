@@ -144,7 +144,7 @@ class App extends Component {
                   allowDecimals={false}
                 />
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={this.getData()} fill="#8884d8" />
+                <Scatter data={this.getData()} fill="#2c3e50" />
               </ScatterChart>
             </ResponsiveContainer>
           </div>
