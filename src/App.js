@@ -4,6 +4,7 @@ import './nprogress.css';
 import { EventList } from './EventList.js';
 import { CitySearch } from './CitySearch.js';
 import { NumberOfEvents } from './NumberOfEvents';
+import { EventGenre } from './EventGenre.js';
 import {
   getEvents,
   extractLocations,
@@ -63,7 +64,6 @@ class App extends Component {
       const city = location.split(', ').shift();
       return { city, number };
     });
-    console.log(data);
     return data;
   };
 
@@ -123,28 +123,31 @@ class App extends Component {
             updateEvents={this.updateEvents}
           />
           <NumberOfEvents updateEventCountState={this.updateEventCountState} />
-          <h4>Events in each city</h4>
-          <ResponsiveContainer height={400}>
-            <ScatterChart
-              margin={{
-                top: 20,
-                right: 20,
-                bottom: 20,
-                left: 20,
-              }}
-            >
-              <CartesianGrid />
-              <XAxis type="category" dataKey="city" name="city" />
-              <YAxis
-                type="number"
-                dataKey="number"
-                name="number of events"
-                allowDecimals={false}
-              />
-              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter data={this.getData()} fill="#8884d8" />
-            </ScatterChart>
-          </ResponsiveContainer>
+          <div className="data-vis-wrapper">
+            <EventGenre events={this.state.events} />
+            <h4>Events in each city</h4>
+            <ResponsiveContainer height={400}>
+              <ScatterChart
+                margin={{
+                  top: 20,
+                  right: 20,
+                  bottom: 20,
+                  left: 20,
+                }}
+              >
+                <CartesianGrid />
+                <XAxis type="category" dataKey="city" name="city" />
+                <YAxis
+                  type="number"
+                  dataKey="number"
+                  name="number of events"
+                  allowDecimals={false}
+                />
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                <Scatter data={this.getData()} fill="#8884d8" />
+              </ScatterChart>
+            </ResponsiveContainer>
+          </div>
           <EventList events={this.state.events} />
         </div>
         <WelcomeScreen
