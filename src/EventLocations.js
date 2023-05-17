@@ -12,7 +12,8 @@ import {
 class EventLocations extends Component {
   getData = () => {
     const { locations, events } = this.props;
-    const data = locations.map((location) => {
+    const sortedLocations = locations.sort();
+    const data = sortedLocations.map((location) => {
       const number = events.filter(
         (event) => event.location === location
       ).length;
