@@ -46,6 +46,7 @@ ul {
 
 h4 {
   margin-bottom: 0;
+  color: var(--primary-colour);
 }
 
 p {
@@ -176,31 +177,10 @@ input {
   text-align: center;
 }
 
-/* What is this? */
-.button-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
-  padding: 20px;
-  font-family: sans-serif;
-}
-
-/* Will I need this? */
 .data-vis-wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-/* Will I need this? */
-.data-vis-wrapper .recharts-responsive-container {
-  min-width: 100%;
-  display: flex;
-}
-
-/* Will I need this? */
-.recharts-surface {
-  overflow: visible;
 }
 
 /*Welcome Screen */

@@ -29,7 +29,7 @@ class EventLocations extends Component {
     return (
       <>
         <h4>Events in each city</h4>
-        <ResponsiveContainer height={400}>
+        <ResponsiveContainer height={300}>
           <ScatterChart
             margin={{
               top: 20,

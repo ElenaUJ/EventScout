@@ -23,12 +23,10 @@ class EventGenre extends Component {
     return (
       <>
         <h4>Popular event genres</h4>
-        <ResponsiveContainer height={400}>
-          <PieChart width={400} height={400}>
+        <ResponsiveContainer height={300}>
+          <PieChart width={300} height={300}>
             <Pie
               data={this.getData()}
-              cx={200}
-              cy={200}
               labelLine={false}
               label={({ name, percent }) => {
                 if (percent > 0) {
