@@ -5,6 +5,7 @@ import { EventList } from './EventList.js';
 import { CitySearch } from './CitySearch.js';
 import { NumberOfEvents } from './NumberOfEvents';
 import { EventGenre } from './EventGenre.js';
+import { EventLocations } from './EventLocations.js';
 import {
   getEvents,
   extractLocations,
@@ -12,15 +13,6 @@ import {
   getAccessToken,
 } from './api.js';
 import { WelcomeScreen } from './WelcomeScreen.js';
-import {
-  ScatterChart,
-  Scatter,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
 
 class App extends Component {
   constructor() {
@@ -51,20 +43,6 @@ class App extends Component {
   updateEventCountState = (eventCount) => {
     this.setState({ eventCount: eventCount });
     this.updateEvents(this.state.currentLocation);
-  };
-
-  getData = () => {
-    const { locations, events } = this.state;
-    const data = locations.map((location) => {
-      const number = events.filter(
-        (event) => event.location === location
-      ).length;
-      // Splitting the locations at the occurrence of comma followed by space, returning an array
-      // Then, shift() method gets the first array element, which is the city name
-      const city = location.split(', ').shift();
-      return { city, number };
-    });
-    return data;
   };
 
   async componentDidMount() {
@@ -106,9 +84,16 @@ class App extends Component {
   }
 
   render() {
-    // Question: According to the PDF to implement the Welcome Screen I was supposed to add these lines. However when I did, it broke my app when offline. It would just show the empty div, a white screen. So... is this line necessary at all?
-    // if (this.state.showWelcomeScreen === undefined)
-    //   return <div className="App" />;
+    if (this.state.showWelcomeScreen === undefined && navigator.onLine) {
+      return (
+        <div className="App">
+          <header className="header">
+            <div className="logo">EventScout</div>
+            <div className="slogan">Stay in the Loop</div>
+          </header>
+        </div>
+      );
+    }
 
     return (
       <div className="App">
@@ -125,28 +110,10 @@ class App extends Component {
           <NumberOfEvents updateEventCountState={this.updateEventCountState} />
           <div className="data-vis-wrapper">
             <EventGenre events={this.state.events} />
-            <h4>Events in each city</h4>
-            <ResponsiveContainer height={400}>
-              <ScatterChart
-                margin={{
-                  top: 20,
-                  right: 20,
-                  bottom: 20,
-                  left: 20,
-                }}
-              >
-                <CartesianGrid />
-                <XAxis type="category" dataKey="city" name="city" />
-                <YAxis
-                  type="number"
-                  dataKey="number"
-                  name="number of events"
-                  allowDecimals={false}
-                />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={this.getData()} fill="#8884d8" />
-              </ScatterChart>
-            </ResponsiveContainer>
+            <EventLocations
+              events={this.state.events}
+              locations={this.state.locations}
+            />
           </div>
           <EventList events={this.state.events} />
         </div>

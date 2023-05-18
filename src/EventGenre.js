@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PieChart, Pie, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 class EventGenre extends Component {
   getData = () => {
@@ -14,23 +14,35 @@ class EventGenre extends Component {
   };
 
   render() {
+    const colors = ['#2c3e50', '#27ae60', '#f39c12', '#808080', '#3498db'];
+
     return (
-      <ResponsiveContainer height={400}>
-        <PieChart width={400} height={400}>
-          <Pie
-            data={this.getData()}
-            cx={200}
-            cy={200}
-            labelLine={false}
-            label={({ name, percent }) =>
-              `${name} ${(percent * 100).toFixed(0)}%`
-            }
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          ></Pie>
-        </PieChart>
-      </ResponsiveContainer>
+      <>
+        <h4>Popular event genres</h4>
+        <ResponsiveContainer height={400}>
+          <PieChart width={400} height={400}>
+            <Pie
+              data={this.getData()}
+              cx={200}
+              cy={200}
+              labelLine={false}
+              label={({ name, percent }) => {
+                if (percent > 0) {
+                  return `${name} ${(percent * 100).toFixed(0)}%`;
+                } else {
+                  return null;
+                }
+              }}
+              outerRadius={80}
+              dataKey="value"
+            >
+              {this.getData().map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={colors[index]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </>
     );
   }
 }
