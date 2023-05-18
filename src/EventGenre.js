@@ -3,11 +3,15 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 class EventGenre extends Component {
   getData = () => {
-    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
+    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
     const data = genres.map((genre) => {
       const value = this.props.events.filter((event) => {
-        return event.summary.split(' ').includes(genre);
+        // .some() has to be added, so .includes() is not run on the array (returning only exact matches) but on every single array element
+        return event.summary.split(' ').some((summaryWord) => {
+          return summaryWord.includes(genre);
+        });
       }).length;
+      console.log('');
       return { name: genre, value };
     });
     return data;
