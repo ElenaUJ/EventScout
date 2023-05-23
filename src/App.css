@@ -109,13 +109,14 @@ input {
 
 .event-list {
   grid-column: 1 / 4;
+  margin-top: 10px;
 }
 
 .event {
   background-color: var(--background-colour);
   color: var(--primary-colour);
   padding: 10px 10px 35px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: left;
   border: 1px solid var(--primary-colour);
   border-radius: 4px;

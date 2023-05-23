@@ -15,7 +15,7 @@ class EventList extends Component {
     if (!navigator.onLine) {
       this.setState({
         infoText:
-          'Content may not be up to date: This page was loaded from the cache. You are currently offline or experiencing connectivity issues, so the information displayed may not be the latest version. Please check your internet connection and refresh the page to see the most recent content.',
+          'Page loaded from cache. Check your internet connection and refresh for updated content.',
       });
     }
   }
