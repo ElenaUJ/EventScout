@@ -65,8 +65,9 @@ input {
 
 /* City input field */
 .city {
-  width: 250px;
+  width: 100%;
   text-align: center;
+  overflow: ellipsis;
 }
 
 .CitySearch {
@@ -81,7 +82,7 @@ input {
 }
 
 .suggestions {
-  width: 250px;
+  width: 100%;
   position: absolute;
   z-index: 2;
   align-self: center;
@@ -169,7 +170,7 @@ input {
 
 .numberOfEvents {
   margin-bottom: 10px;
-  width: 250px;
+  width: 100%;
   text-align: center;
 }
 
@@ -316,5 +317,10 @@ input {
   }
   .eventLocations {
     display: none;
+  }
+  .numberOfEvents,
+  .suggestions,
+  .city {
+    width: 250px;
   }
 }

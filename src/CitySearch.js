@@ -59,7 +59,7 @@ class CitySearch extends Component {
             }}
             type="text"
             value={this.state.query}
-            placeholder={'choose your location'}
+            placeholder={'location'}
           />
           <ul
             className="suggestions"

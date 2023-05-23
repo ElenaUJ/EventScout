@@ -28,7 +28,7 @@ class EventLocations extends Component {
 
   render() {
     return (
-      <ResponsiveContainer className="eventLocations">
+      <ResponsiveContainer className="eventLocations" height={400}>
         <ScatterChart
           margin={{
             left: 20,

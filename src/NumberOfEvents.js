@@ -38,7 +38,7 @@ class NumberOfEvents extends Component {
           type="number"
           value={this.state.query}
           onChange={this.handleInputChanged}
-          placeholder={'select number of events'}
+          placeholder={'number of events'}
         ></input>
         <ErrorAlert text={this.state.errorText} />
       </div>
