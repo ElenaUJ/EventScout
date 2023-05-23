@@ -6,7 +6,7 @@ class NumberOfEvents extends Component {
     super();
 
     this.state = {
-      query: 32,
+      query: '',
       errorText: '',
     };
   }
@@ -19,10 +19,10 @@ class NumberOfEvents extends Component {
     let query;
     if (input > 100) {
       query = 100;
-      this.setState({ errorText: 'Please select a number between 1 and 100' });
+      this.setState({ errorText: 'Please select a number from 1 to 100' });
     } else if (input < 1) {
       query = 32;
-      this.setState({ errorText: 'Please select a number between 1 and 100' });
+      this.setState({ errorText: 'Please select a number from 1 to 100' });
     } else {
       query = input;
       this.setState({ errorText: '' });
@@ -38,6 +38,7 @@ class NumberOfEvents extends Component {
           type="number"
           value={this.state.query}
           onChange={this.handleInputChanged}
+          placeholder={'select number of events'}
         ></input>
         <ErrorAlert text={this.state.errorText} />
       </div>

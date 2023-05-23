@@ -11,7 +11,6 @@ class EventGenre extends Component {
           return summaryWord.includes(genre);
         });
       }).length;
-      console.log('');
       return { name: genre, value };
     });
     return data;
@@ -21,30 +20,27 @@ class EventGenre extends Component {
     const colors = ['#2c3e50', '#27ae60', '#f39c12', '#808080', '#3498db'];
 
     return (
-      <>
-        <h4>Popular event genres</h4>
-        <ResponsiveContainer height={300}>
-          <PieChart width={300} height={300}>
-            <Pie
-              data={this.getData()}
-              labelLine={false}
-              label={({ name, percent }) => {
-                if (percent > 0) {
-                  return `${name} ${(percent * 100).toFixed(0)}%`;
-                } else {
-                  return null;
-                }
-              }}
-              outerRadius={80}
-              dataKey="value"
-            >
-              {this.getData().map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index]} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-      </>
+      <ResponsiveContainer className="eventGenre" height={300}>
+        <PieChart>
+          <Pie
+            data={this.getData()}
+            labelLine={false}
+            label={({ name, percent }) => {
+              if (percent > 0) {
+                return `${name} ${(percent * 100).toFixed(0)}%`;
+              } else {
+                return null;
+              }
+            }}
+            outerRadius={80}
+            dataKey="value"
+          >
+            {this.getData().map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index]} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
     );
   }
 }

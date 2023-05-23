@@ -15,6 +15,9 @@
 .content {
   text-align: center;
   padding: 1% 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr;
+  grid-gap: 10px;
 }
 
 .header {
@@ -44,13 +47,8 @@ ul {
   list-style: none;
 }
 
-h4 {
-  margin-bottom: 0;
-  color: var(--primary-colour);
-}
-
 p {
-  margin: 5px 0;
+  margin: 0;
 }
 
 input {
@@ -74,10 +72,12 @@ input {
 .CitySearch {
   display: flex;
   flex-direction: column;
-  flex-basis: 300px;
-  max-width: 300px;
-  margin: auto;
   position: relative;
+}
+
+.city-alert-wrapper {
+  display: flex;
+  grid-column: 1 / 4;
 }
 
 .suggestions {
@@ -108,14 +108,14 @@ input {
 }
 
 .event-list {
-  margin-top: 18px;
+  grid-column: 1 / 4;
 }
 
 .event {
   background-color: var(--background-colour);
   color: var(--primary-colour);
   padding: 10px 10px 35px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   text-align: left;
   border: 1px solid var(--primary-colour);
   border-radius: 4px;
@@ -167,8 +167,8 @@ input {
 }
 
 .numberOfEvents {
+  margin-bottom: 10px;
   width: 250px;
-  margin: 20px auto 0 auto;
   text-align: center;
 }
 
@@ -177,11 +177,21 @@ input {
   text-align: center;
 }
 
-.data-vis-wrapper {
+.eventLocations {
+  grid-row: 2 / 4;
+  grid-column: 3;
+}
+
+.eventGenre {
+  grid-row: 3 / 4;
+  grid-column: 1 / 3;
+}
+
+/* .data-vis-wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
+} */
 
 /*Welcome Screen */
 .WelcomeScreen {

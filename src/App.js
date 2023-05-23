@@ -102,19 +102,16 @@ class App extends Component {
           <div className="slogan">Stay in the Loop</div>
         </header>
         <div className="content">
-          <h4>Choose your nearest city</h4>
           <CitySearch
             locations={this.state.locations}
             updateEvents={this.updateEvents}
           />
           <NumberOfEvents updateEventCountState={this.updateEventCountState} />
-          <div className="data-vis-wrapper">
-            <EventGenre events={this.state.events} />
-            <EventLocations
-              events={this.state.events}
-              locations={this.state.locations}
-            />
-          </div>
+          <EventGenre events={this.state.events} />
+          <EventLocations
+            events={this.state.events}
+            locations={this.state.locations}
+          />
           <EventList events={this.state.events} />
         </div>
         <WelcomeScreen

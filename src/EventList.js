@@ -23,16 +23,16 @@ class EventList extends Component {
   render() {
     const { events } = this.props;
     return (
-      <>
+      <div className="event-list">
         <InfoAlert text={this.state.infoText} />
-        <ul className="event-list">
+        <ul>
           {events.map((event) => (
             <li className="event" key={event.id}>
               <Event event={event} />
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   }
 }
