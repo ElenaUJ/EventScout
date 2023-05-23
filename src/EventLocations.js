@@ -31,7 +31,6 @@ class EventLocations extends Component {
       <ResponsiveContainer className="eventLocations">
         <ScatterChart
           margin={{
-            bottom: 20,
             left: 20,
           }}
         >

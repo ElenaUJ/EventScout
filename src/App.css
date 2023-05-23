@@ -270,7 +270,7 @@ input {
 }
 
 /* What is this? */
-@media only screen and (min-width: 992px) {
+/* @media only screen and (min-width: 992px) {
   .data-vis-wrapper {
     flex-direction: row;
   }
@@ -280,7 +280,7 @@ input {
     min-width: auto;
     margin: 0 auto;
   }
-}
+} */
 
 @media all and (max-width: 750px) {
   .header {
@@ -298,5 +298,22 @@ input {
   .short-info,
   .details {
     margin-bottom: 20px;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+  .city-alert-wrapper {
+    align-items: center;
+    margin-top: 10px;
+  }
+  .city {
+    margin-top: 10px;
+  }
+  .eventGenre {
+    margin-bottom: 10px;
+  }
+  .eventLocations {
+    display: none;
   }
 }

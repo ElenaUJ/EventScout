@@ -1,5 +1,35 @@
 import React, { Component } from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from 'recharts';
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  if (percent > 0) {
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? 'start' : 'end'}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  } else {
+    return null;
+  }
+};
 
 class EventGenre extends Component {
   getData = () => {
@@ -22,18 +52,13 @@ class EventGenre extends Component {
     return (
       <ResponsiveContainer className="eventGenre" height={300}>
         <PieChart>
+          <Legend />
           <Pie
             data={this.getData()}
-            labelLine={false}
-            label={({ name, percent }) => {
-              if (percent > 0) {
-                return `${name} ${(percent * 100).toFixed(0)}%`;
-              } else {
-                return null;
-              }
-            }}
-            outerRadius={80}
+            outerRadius={100}
             dataKey="value"
+            label={renderCustomizedLabel}
+            labelLine={false}
           >
             {this.getData().map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index]} />
