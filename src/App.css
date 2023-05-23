@@ -8,18 +8,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
-.App * {
-  box-sizing: border-box;
-}
-
-.content {
-  text-align: center;
-  padding: 1% 5%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 4fr;
-  grid-gap: 10px;
-}
-
+/* Header */
 .header {
   display: flex;
   align-items: center;
@@ -28,29 +17,42 @@
   color: #ffffff;
   padding: 20px;
 }
-
 .logo {
   font-size: 28px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
-
 .slogan {
   font-size: 16px;
   font-weight: normal;
   letter-spacing: 1px;
 }
 
-ul {
-  padding: 0;
-  list-style: none;
+/* General layout */
+.App * {
+  box-sizing: border-box;
+}
+.content {
+  text-align: center;
+  padding: 1% 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr;
+  grid-gap: 10px;
 }
 
-p {
+/* Alerts */
+.Alert p {
+  height: 20px;
   margin: 0;
+  text-align: center;
+}
+.city-alert-wrapper {
+  display: flex;
+  grid-column: 1 / 4;
 }
 
+/* Input fields */
 input {
   background-color: var(--background-colour);
   padding: 8px 6px 8px 10px;
@@ -61,26 +63,17 @@ input {
   line-height: 20px;
   align-self: center;
   height: 38px;
+  color: var(--primary-colour);
 }
-
-/* City input field */
-.city {
-  width: 100%;
-  text-align: center;
-  overflow: ellipsis;
-}
-
 .CitySearch {
   display: flex;
   flex-direction: column;
   position: relative;
 }
-
-.city-alert-wrapper {
-  display: flex;
-  grid-column: 1 / 4;
+.city {
+  width: 100%;
+  text-align: center;
 }
-
 .suggestions {
   width: 100%;
   position: absolute;
@@ -89,30 +82,47 @@ input {
   margin: 0;
   top: 43px;
   font-size: 14px;
-  box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 16px -12px rgba(44, 62, 80, 0.75);
 }
-
 .suggestions > li {
   text-align: left;
   padding: 8px 6px 8px 10px;
   background-color: #eee;
   cursor: default;
+  color: var(--primary-colour);
 }
-
 .suggestions > li:last-child {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-
 .suggestions > li:hover {
   background-color: var(--lighter-accent-colour);
 }
+.numberOfEvents {
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
 
+/* Data visualization */
+.eventLocations {
+  grid-row: 2 / 4;
+  grid-column: 3;
+}
+.eventGenre {
+  grid-row: 3 / 4;
+  grid-column: 1 / 3;
+}
+
+/* Event-List */
+ul {
+  padding: 0;
+  list-style: none;
+}
 .event-list {
   grid-column: 1 / 4;
   margin-top: 10px;
 }
-
 .event {
   background-color: var(--background-colour);
   color: var(--primary-colour);
@@ -123,13 +133,15 @@ input {
   border-radius: 4px;
   position: relative;
 }
-
 .title-wrapper {
-  align-items: center;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
-
+.name {
+  font-size: 18px;
+  font-weight: 600;
+}
 .details-btn {
   background-color: var(--secondary-colour);
   position: absolute;
@@ -141,59 +153,9 @@ input {
   cursor: pointer;
   display: block;
 }
-
 .details-btn:hover {
   background-color: var(--accent-colour);
 }
-
-.name {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-/* What is this? */
-.group-name {
-  text-transform: uppercase;
-  font-size: 14px;
-}
-
-/* What is this? */
-.going,
-.visibility {
-  font-style: italic;
-}
-
-/* What is this */
-.description {
-  overflow-x: hidden;
-}
-
-.numberOfEvents {
-  margin-bottom: 10px;
-  width: 100%;
-  text-align: center;
-}
-
-.Alert p {
-  height: 20px;
-  text-align: center;
-}
-
-.eventLocations {
-  grid-row: 2 / 4;
-  grid-column: 3;
-}
-
-.eventGenre {
-  grid-row: 3 / 4;
-  grid-column: 1 / 3;
-}
-
-/* .data-vis-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-} */
 
 /*Welcome Screen */
 .WelcomeScreen {
@@ -205,7 +167,51 @@ input {
   text-align: center;
   padding: 5%;
 }
-
+.button_cont {
+  margin-top: 30px;
+}
+.google-btn {
+  width: 184px;
+  height: 42px;
+  margin: 1rem 1rem 5rem 1rem;
+  background-color: #4285f4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.google-btn:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+.google-btn:active {
+  background: #1669f2;
+}
+.google-icon-wrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.google-icon {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: -8px;
+  width: 18px;
+  height: 18px;
+}
+.btn-text {
+  float: right;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  font-family: 'Roboto';
+  background-color: #4285f4;
+  width: 80%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+}
 /* .login-button {
   color: #494949;
   text-transform: uppercase;
@@ -219,87 +225,9 @@ input {
   margin: 1rem;
 } */
 
-.button_cont {
-  margin-top: 30px;
-}
-
-.google-btn {
-  width: 184px;
-  height: 42px;
-  margin: 1rem 1rem 5rem 1rem;
-  background-color: #4285f4;
-  border-radius: 2px;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-}
-
-.google-btn:hover {
-  box-shadow: 0 0 6px #4285f4;
-}
-
-.google-btn:active {
-  background: #1669f2;
-}
-
-.google-icon-wrapper {
-  position: absolute;
-  margin-top: 1px;
-  margin-left: 1px;
-  width: 40px;
-  height: 40px;
-  border-radius: 2px;
-  background-color: #fff;
-}
-
-.google-icon {
-  position: absolute;
-  margin-top: 11px;
-  margin-left: -8px;
-  width: 18px;
-  height: 18px;
-}
-
-.btn-text {
-  float: right;
-  color: #fff;
-  font-size: 14px;
-  letter-spacing: 0.2px;
-  font-family: 'Roboto';
-  background-color: #4285f4;
-  width: 80%;
-  height: 100%;
-  margin: 0;
-  text-align: center;
-}
-
-/* What is this? */
-/* @media only screen and (min-width: 992px) {
-  .data-vis-wrapper {
-    flex-direction: row;
-  }
-  .data-vis-wrapper .recharts-responsive-container {
-    flex-basis: 50%;
-    max-width: 50%;
-    min-width: auto;
-    margin: 0 auto;
-  }
-} */
-
 @media all and (max-width: 750px) {
   .header {
     flex-direction: column;
-  }
-  .title-wrapper {
-    flex-direction: column-reverse;
-  }
-  h1 {
-    font-size: 24px;
-  }
-  .WelcomeScreen {
-    top: 93px;
-  }
-  .short-info,
-  .details {
-    margin-bottom: 20px;
   }
   .content {
     display: flex;
@@ -308,6 +236,11 @@ input {
   .city-alert-wrapper {
     align-items: center;
     margin-top: 10px;
+  }
+  .numberOfEvents,
+  .suggestions,
+  .city {
+    width: 250px;
   }
   .city {
     margin-top: 10px;
@@ -318,9 +251,15 @@ input {
   .eventLocations {
     display: none;
   }
-  .numberOfEvents,
-  .suggestions,
-  .city {
-    width: 250px;
+
+  .title-wrapper {
+    flex-direction: column-reverse;
+  }
+  .short-info,
+  .details {
+    margin-bottom: 20px;
+  }
+  .WelcomeScreen {
+    top: 93px;
   }
 }
