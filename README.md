@@ -3,81 +3,28 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [How to Run](#how-to-run)
 - [Links](#links)
-- [Process](#process)
-  - [Technologies used](#technologies-used)
-  - [Dependencies](#dependencies)
-  - [API](#api)
 - [Features, User Stories and BDD Scenarios](#features-user-stories-and-bdd-scenarios)
-- [Credits](#credits)
+- [Process](#process)
+  - [Testing](#testing)
+  - [Progressive Web App (PWA)](#progressive-web-app-pwa)
+  - [Further Key Technologies](#further-key-technologies)
+  - [All Dependencies](#all-dependencies)
+- [Data Flow: Google Calendar API and Serverless Authorization](#data-flow-google-calendar-api-and-serverless-authorization)
+  - [Google Verification](#google-verification)
 
 ## Overview
 
-EventScout is an app which helps users to research, schedule and attend events in their city.
+![Screenshot of EventScout UI](/public/Screenshot_EventScout.png?raw=true)
 
-The app is built using a test-driven development technique (TDD) and is designed as a serverless, progressive web app (PWA). It uses the Google Calendar API to retrieve upcoming events, with access authorization being handled by the serverless backend powered by AWS Lambda. This backend verifies consumer keys and issues a token that allows users to access the API.
+EventScout is an app which helps users to research, schedule and attend web development events in their city.
 
-The app is still under construction.
-
-## How to Run
+The app is built using [test/behaviour-driven development](#features-user-stories-and-bdd-scenarios) techniques (TDD/BDD) and is designed as a serverless, [progressive web app (PWA)](#progressive-web-app-pwa). It uses the [Google Calendar API](#data-flow-google-calendar-api-and-serverless-authorization) to retrieve upcoming events, with access authorization being handled by the serverless backend powered by AWS Lambda. This backend verifies consumer keys and issues a token that allows users to access the API. The app also works offline using cached data.
 
 ## Links
 
 - [Live site URL](https://elenauj.github.io/EventScout/)
 - [Code URL](https://github.com/ElenaUJ/EventScout)
-
-## Process
-
-### Technologies Used
-
-- Create React App
-- React
-
-### Dependencies
-
-This project has the following dependencies:
-
-- "@testing-library/jest-dom": "^5.16.5",
-- "@testing-library/react": "^13.4.0",
-- "@testing-library/user-event": "^13.5.0",
-- "react": "^18.2.0",
-- "react-dom": "^18.2.0",
-- "react-scripts": "5.0.1",
-- "web-vitals": "^2.1.4",
-- "workbox-background-sync": "^6.5.4",
-- "workbox-broadcast-update": "^6.5.4",
-- "workbox-cacheable-response": "^6.5.4",
-- "workbox-core": "^6.5.4",
-- "workbox-expiration": "^6.5.4",
-- "workbox-google-analytics": "^6.5.4",
-- "workbox-navigation-preload": "^6.5.4",
-- "workbox-precaching": "^6.5.4",
-- "workbox-range-requests": "^6.5.4",
-- "workbox-routing": "^6.5.4",
-- "workbox-strategies": "^6.5.4",
-- "workbox-streams": "^6.5.4"
-
-And dev dependencies:
-
-- "gh-pages": "^5.0.0"
-
-Furthermore, it uses the following linting configuration:
-
-- ESLint rules:
-
-```json
-"eslintConfig": {
-  "extends": [
-    "react-app",
-    "react-app/jest"
-  ]
-}
-```
-
-- [Prettier configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
-
-### API Documentation
 
 ## Features, User Stories and BDD Scenarios
 
@@ -86,7 +33,7 @@ Furthermore, it uses the following linting configuration:
 **User story**
 
 **As a** user
-**I should be able to** “filter events by city”
+**I should be able to** filter events by city
 **So that** I can see the list of events that take place in that city
 
 **Scenarios**
@@ -170,11 +117,7 @@ Furthermore, it uses the following linting configuration:
 **Given** the user lost internet connection
 **When** the user accesses the app
 **Then** chached data should still be available
-
-**Scenario 2: Show error when user changes the settings (city, time range)**
-**Given** the user lost internet connection
-**When** the user tries to change settings (e.g. city, time range)
-**Then** an error message should appear
+**And** an error message should appear
 
 ### Feature 5: Data visualization
 
@@ -191,4 +134,84 @@ Furthermore, it uses the following linting configuration:
 **When** the user wants to compare events between cities
 **Then** they should be able to access a chart with the number of upcoming events in each city
 
-## Credits
+## Process
+
+### Testing
+
+This project follows a test-driven approach to ensure the quality and reliability of our application. We utilized a range of testing utilities, including:
+
+- Jest: A widely adopted JavaScript testing framework that provides a robust foundation for unit testing React components.
+- Enzyme: A JavaScript testing utility for React that facilitates testing of component behaviors and interactions.
+- Jest-Cucumber: A library that combines Jest and Cucumber, enabling the creation of behavior-driven development (BDD) tests with a natural language syntax.
+- Puppeteer: A Node.js library that facilitates end-to-end testing of web applications.
+
+### Progressive Web App (PWA)
+
+This app utilizes service workers to enable offline support and caching of app resources. With a manifest file and responsive design implementation, users can install and launch the app as a standalone application on compatible devices, while enjoying a seamless experience across different screen sizes and devices. Taken together, these features make EventScout fully compliant with PWA specification.
+
+### Further Key Technologies
+
+- React: A JavaScript library for building user interfaces.
+- AWS Lambda: A serverless computing service.
+- Axios: A popular HTTP client library used for making asynchronous requests.
+- Recharts: A charting library for React that provides customizable and interactive charts.
+- Atatus: An application performance management tool.
+
+### All Dependencies
+
+This project has the following dependencies:
+
+- "@testing-library/jest-dom": "^5.16.2",
+- "@testing-library/react": "^11.2.7",
+- "@testing-library/user-event": "^12.8.3",
+- "atatus-spa": "^4.5.0",
+- "axios": "^1.3.6",
+- "nprogress": "^0.2.0",
+- "react": "^17.0.2",
+- "react-dom": "^17.0.2",
+- "react-scripts": "5.0.1",
+- "recharts": "^2.6.2",
+- "web-vitals": "^2.1.4",
+- "workbox-background-sync": "^6.5.4",
+- "workbox-broadcast-update": "^6.5.4",
+- "workbox-cacheable-response": "^6.5.4",
+- "workbox-core": "^6.5.4",
+- "workbox-expiration": "^6.5.4",
+- "workbox-google-analytics": "^6.5.4",
+- "workbox-navigation-preload": "^6.5.4",
+- "workbox-precaching": "^6.5.4",
+- "workbox-range-requests": "^6.5.4",
+- "workbox-routing": "^6.5.4",
+- "workbox-strategies": "^6.5.4",
+- "workbox-streams": "^6.5.4"
+
+And dev dependencies:
+
+- "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
+- "enzyme": "^3.11.0",
+- "gh-pages": "^5.0.0",
+- "jest-cucumber": "^3.0.1",
+- "puppeteer": "^18.1.0"
+
+Furthermore, it uses the following linting configuration:
+
+- ESLint rules:
+
+```json
+"eslintConfig": {
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ]
+}
+```
+
+- [Prettier configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
+
+## Data Flow: Google Calendar API and Serverless Authorization
+
+The EventScout App uses data stored in CareerFoundry's Google Calendar account through the Google Calendar API. To access the protected API, the app employs an authorization service deployed on AWS Lambda, a serverless computing platform. By submitting its credentials to the Lambda function, the app undergoes a validation process. Once authenticated, the app obtains a JSON Web Token (JWT) for subsequent requests to the Google Calendar API.
+
+### Google Verification
+
+The app is currently undergoing the verification process with Google to allow unrestricted public access.
