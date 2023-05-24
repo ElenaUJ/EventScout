@@ -76,9 +76,7 @@ class App extends Component {
           });
         }
       });
-    }
-
-    if (!navigator.onLine && this.mounted) {
+    } else if (!navigator.onLine && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({
@@ -86,6 +84,10 @@ class App extends Component {
             locations: extractLocations(events),
             eventCount: 32,
           });
+          console.log('app is offline and events were set to ' + events);
+          console.log(
+            'also, locations were set to: ' + extractLocations(events)
+          );
         }
       });
     }
