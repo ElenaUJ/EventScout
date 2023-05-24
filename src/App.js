@@ -77,6 +77,18 @@ class App extends Component {
         }
       });
     }
+
+    if (!navigator.onLine && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({
+            events: events,
+            locations: extractLocations(events),
+            eventCount: 32,
+          });
+        }
+      });
+    }
   }
 
   componentWillUnmount() {
