@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { Event } from './Event.js';
-import { InfoAlert } from './Alert.js';
+import { ErrorAlert } from './Alert.js';
 
 class EventList extends Component {
   constructor() {
     super();
 
     this.state = {
-      infoText: '',
+      errorText: '',
     };
   }
 
   componentDidMount() {
     if (!navigator.onLine) {
       this.setState({
-        infoText:
+        errorText:
           'Page loaded from cache. Check your internet connection and refresh for updated content.',
       });
     }
@@ -24,7 +24,7 @@ class EventList extends Component {
     const { events } = this.props;
     return (
       <div className="event-list">
-        <InfoAlert text={this.state.infoText} />
+        <ErrorAlert text={this.state.errorText} />
         <ul>
           {events.map((event) => (
             <li className="event" key={event.id}>
