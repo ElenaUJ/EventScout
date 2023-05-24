@@ -35,7 +35,12 @@ class EventLocations extends Component {
           }}
         >
           <CartesianGrid />
-          <XAxis type="category" dataKey="city" name="city" />
+          <XAxis
+            type="category"
+            dataKey="city"
+            name="city"
+            allowDuplicatedCategory={false}
+          />
           <YAxis
             type="number"
             dataKey="number"
@@ -46,10 +51,9 @@ class EventLocations extends Component {
           </YAxis>
           <Tooltip
             cursor={{ strokeDasharray: '3 3' }}
-            labelFormatter={(value, name, { payload }) => [
-              payload.x,
-              payload.y,
-            ]}
+            labelFormatter={() => {
+              return '';
+            }}
           />
           <Scatter data={this.getData()} fill="#2c3e50" />
         </ScatterChart>
