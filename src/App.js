@@ -84,16 +84,16 @@ class App extends Component {
   }
 
   render() {
-    // if (this.state.showWelcomeScreen === undefined && navigator.onLine) {
-    //   return (
-    //     <div className="App">
-    //       <header className="header">
-    //         <div className="logo">EventScout</div>
-    //         <div className="slogan">Stay in the Loop</div>
-    //       </header>
-    //     </div>
-    //   );
-    // }
+    if (this.state.showWelcomeScreen === undefined && navigator.onLine) {
+      return (
+        <div className="App">
+          <header className="header">
+            <div className="logo">EventScout</div>
+            <div className="slogan">Stay in the Loop</div>
+          </header>
+        </div>
+      );
+    }
 
     return (
       <div className="App">
