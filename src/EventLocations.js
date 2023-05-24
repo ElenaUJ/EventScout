@@ -44,7 +44,13 @@ class EventLocations extends Component {
           >
             <Label value="number of events" angle={270} />
           </YAxis>
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          <Tooltip
+            cursor={{ strokeDasharray: '3 3' }}
+            labelFormatter={(value, name, { payload }) => [
+              payload.x,
+              payload.y,
+            ]}
+          />
           <Scatter data={this.getData()} fill="#2c3e50" />
         </ScatterChart>
       </ResponsiveContainer>
