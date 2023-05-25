@@ -29,14 +29,16 @@ class App extends Component {
 
   updateEvents = (location) => {
     getEvents().then((events) => {
-      this.setState({ currentLocation: location });
-      const locationEvents =
-        location === 'all' || ''
-          ? events
-          : events.filter((event) => event.location === location);
-      const eventCount = !this.state.eventCount ? 32 : this.state.eventCount;
-      const shownEvents = locationEvents.slice(0, eventCount);
-      this.setState({ events: shownEvents });
+      if (this.mounted) {
+        this.setState({ currentLocation: location });
+        const locationEvents =
+          location === 'all' || ''
+            ? events
+            : events.filter((event) => event.location === location);
+        const eventCount = !this.state.eventCount ? 32 : this.state.eventCount;
+        const shownEvents = locationEvents.slice(0, eventCount);
+        this.setState({ events: shownEvents });
+      }
     });
   };
 
@@ -54,11 +56,13 @@ class App extends Component {
       this.mounted
     ) {
       getEvents().then((events) => {
-        this.setState({
-          events: events,
-          locations: extractLocations(events),
-          eventCount: 32,
-        });
+        if (this.mounted) {
+          this.setState({
+            events: events,
+            locations: extractLocations(events),
+            eventCount: 32,
+          });
+        }
       });
       return;
     }
@@ -88,7 +92,11 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.showWelcomeScreen === undefined && navigator.onLine) {
+    if (
+      this.state.showWelcomeScreen === undefined &&
+      navigator.onLine &&
+      !window.location.href.startsWith('http://localhost')
+    ) {
       return (
         <div className="App">
           <header className="header">

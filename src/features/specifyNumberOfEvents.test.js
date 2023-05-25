@@ -8,6 +8,21 @@ import { NumberOfEvents } from '../NumberOfEvents.js';
 const feature = loadFeature('./src/features/specifyNumberOfEvents.feature');
 
 defineFeature(feature, (test) => {
+  // Solution to mitigate window.ResizeObserver is not a constructor error, found here https://github.com/maslianok/react-resize-detector/issues/145
+  const { ResizeObserver } = window;
+  beforeEach(() => {
+    delete window.ResizeObserver;
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+  afterEach(() => {
+    window.ResizeObserver = ResizeObserver;
+    jest.restoreAllMocks();
+  });
+
   test("When user hasn't specified a number, 32 is the default number", ({
     given,
     when,
@@ -35,6 +50,7 @@ defineFeature(feature, (test) => {
     let AppWrapper;
     given('the user received a list of 32 events per selected city', () => {
       AppWrapper = mount(<App />);
+      AppWrapper.instance().setState({ showWelcomeScreen: false });
       AppWrapper.setState({ eventCount: 32 });
     });
     let NumberOfEventsWrapper;

@@ -11,6 +11,7 @@ describe('<App /> component', () => {
   let AppWrapper;
   beforeAll(() => {
     AppWrapper = shallow(<App />);
+    AppWrapper.setState({ showWelcomeScreen: false });
   });
 
   test('render list of events', () => {
@@ -29,9 +30,26 @@ describe('<App /> component', () => {
 
 // Separating integration tests from unit tests (best practice)
 describe('<App /> integration', () => {
+  // Solution to mitigate window.ResizeObserver is not a constructor error, found here https://github.com/maslianok/react-resize-detector/issues/145
+  const { ResizeObserver } = window;
+  beforeEach(() => {
+    delete window.ResizeObserver;
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+  afterEach(() => {
+    window.ResizeObserver = ResizeObserver;
+    jest.restoreAllMocks();
+  });
+
   // Question: I tried to mount and unmount the AppWrapper in beforeAll/afterAll functions but for some tests it started throwing errors and I don't know why. Any idea?
   test('App passes "events" state as a prop to EventList', () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.instance().setState({ showWelcomeScreen: false });
+    AppWrapper.update();
     const AppEventsState = AppWrapper.state('events');
     // Step necessary because if both App state and EventList prop could both be undefined
     expect(AppEventsState).not.toEqual(undefined);
@@ -42,6 +60,8 @@ describe('<App /> integration', () => {
 
   test('App passes "locations" state as a prop to CitySearch', () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.instance().setState({ showWelcomeScreen: false });
+    AppWrapper.update();
     const AppLocationsState = AppWrapper.state('locations');
     expect(AppLocationsState).not.toEqual(undefined);
     expect(AppWrapper.find(CitySearch).props().locations).toEqual(
@@ -52,6 +72,8 @@ describe('<App /> integration', () => {
 
   test('get list of events matching the city selected by the user', async () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.instance().setState({ showWelcomeScreen: false });
+    AppWrapper.update();
     const CitySearchWrapper = AppWrapper.find(CitySearch);
     const locations = extractLocations(mockData);
     // CitySearch suggestions state to have all available cities (without see all cities)
@@ -74,6 +96,8 @@ describe('<App /> integration', () => {
 
   test('get list of all events when user selects "see all cities"', async () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.instance().setState({ showWelcomeScreen: false });
+    AppWrapper.update();
     const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions li');
     await suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
@@ -83,6 +107,8 @@ describe('<App /> integration', () => {
 
   test('NumberOfEvents value change updates eventCount state in App component', () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.instance().setState({ showWelcomeScreen: false });
+    AppWrapper.update();
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: 20 } };
     NumberOfEventsWrapper.find('.numberOfEvents').simulate(
@@ -96,6 +122,8 @@ describe('<App /> integration', () => {
 
   test("if NumberOfEvents input is higher than 100, set App's eventCount to 100", async () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.instance().setState({ showWelcomeScreen: false });
+    AppWrapper.update();
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: 101 } };
     NumberOfEventsWrapper.find('.numberOfEvents').simulate(
@@ -109,6 +137,8 @@ describe('<App /> integration', () => {
 
   test("if NumberOfEvents input is lower than 1, set App's eventCount to 32", async () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.instance().setState({ showWelcomeScreen: false });
+    AppWrapper.update();
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: -1 } };
     NumberOfEventsWrapper.find('.numberOfEvents').simulate(
@@ -122,6 +152,8 @@ describe('<App /> integration', () => {
 
   test('Number of events passed to EventList matches eventCount set by the user', async () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.instance().setState({ showWelcomeScreen: false });
+    AppWrapper.update();
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: 2 } };
     NumberOfEventsWrapper.find('.numberOfEvents').simulate(
