@@ -10,21 +10,6 @@ import { loadFeature, defineFeature } from 'jest-cucumber';
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
 defineFeature(feature, (test) => {
-  // Solution to mitigate window.ResizeObserver is not a constructor error, found here https://github.com/maslianok/react-resize-detector/issues/145
-  const { ResizeObserver } = window;
-  beforeEach(() => {
-    delete window.ResizeObserver;
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
-    jest.restoreAllMocks();
-  });
-
   test("When user hasn't searched for a city, show upcoming events from all cities.", ({
     given,
     when,
@@ -36,7 +21,6 @@ defineFeature(feature, (test) => {
     let AppWrapper;
     when('the user opens the app', () => {
       AppWrapper = mount(<App />);
-      AppWrapper.instance().setState({ showWelcomeScreen: false });
     });
     then('the user should see a list of all upcoming events', () => {
       // Because getEvents() is asynchronous
@@ -80,8 +64,6 @@ defineFeature(feature, (test) => {
     given('the user was typing "Berlin" in the city textbox', async () => {
       // async/await is used here, because the AppWrapper has to be fully mounted before simulating the user event
       AppWrapper = await mount(<App />);
-      AppWrapper.instance().setState({ showWelcomeScreen: false });
-      AppWrapper.update();
       const eventObject = { target: { value: 'Berlin' } };
       AppWrapper.find('.city').simulate('change', eventObject);
     });

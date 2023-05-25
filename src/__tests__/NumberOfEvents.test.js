@@ -15,7 +15,6 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('default number of events is 32', () => {
-    NumberOfEventsWrapper.setState({ query: 32 });
     expect(NumberOfEventsWrapper.find('.numberOfEvents').prop('value')).toBe(
       32
     );

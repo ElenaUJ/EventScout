@@ -10,28 +10,12 @@ import { loadFeature, defineFeature } from 'jest-cucumber';
 const feature = loadFeature('./src/features/showHideAnEventsDetails.feature');
 
 defineFeature(feature, (test) => {
-  // Solution to mitigate window.ResizeObserver is not a constructor error, found here https://github.com/maslianok/react-resize-detector/issues/145
-  const { ResizeObserver } = window;
-  beforeEach(() => {
-    delete window.ResizeObserver;
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
-    jest.restoreAllMocks();
-  });
-
   test('An event element is collapsed by default', ({ given, when, then }) => {
     let AppWrapper;
     given(
       'the user has just selected the city for which they wanted to browse events',
       async () => {
         AppWrapper = mount(<App />);
-        AppWrapper.instance().setState({ showWelcomeScreen: false });
         await AppWrapper.instance().updateEvents('Berlin, Germany');
       }
     );
