@@ -47,7 +47,7 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true;
-    // This is just for the localhost testing environment, because with the below code it wouldn't update the events state when mounted
+    // This is for the localhost testing and the offline environment, because with the below code it wouldn't update the events state when mounted
     if (
       (window.location.href.startsWith('http://localhost') ||
         !navigator.onLine) &&
