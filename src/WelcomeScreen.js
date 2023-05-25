@@ -6,8 +6,16 @@ function WelcomeScreen(props) {
     <div className="WelcomeScreen">
       <h1>Welcome to the EventScout App</h1>
       <h4>
-        Log in to see upcoming events around the world for full-stack developers
+        Log in to see upcoming events around the world for full-stack
+        developers.
       </h4>
+      <p>
+        With this app, you can easily find and filter events based on cities,
+        explore event details, specify the number of displayed events, and even
+        use the app offline. Additionally, it provides data visualization
+        through charts, allowing you to compare the number of upcoming events in
+        different cities at a glance.
+      </p>
       <div className="button_cont" align="center">
         <div className="google-btn">
           <div className="google-icon-wrapper">

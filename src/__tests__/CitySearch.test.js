@@ -5,7 +5,6 @@ import { mockData } from '../mock-data.js';
 import { extractLocations } from '../api.js';
 
 describe('<CitySearch /> component', () => {
-  // superset of all locations is being passed to CitySearchWrapper
   let locations;
   let CitySearchWrapper;
   beforeAll(() => {
@@ -15,7 +14,6 @@ describe('<CitySearch /> component', () => {
     );
   });
 
-  // Looking for an element with the CSS class `city`
   test('render text input', () => {
     expect(CitySearchWrapper.find('.city')).toHaveLength(1);
   });
@@ -24,7 +22,6 @@ describe('<CitySearch /> component', () => {
     expect(CitySearchWrapper.find('.suggestions')).toHaveLength(1);
   });
 
-  // Is the input field value prop equal to what's in the CitySearch query state
   test('renders text input correctly', () => {
     const query = CitySearchWrapper.state('query');
     expect(CitySearchWrapper.find('.city').prop('value')).toBe(query);
@@ -34,8 +31,6 @@ describe('<CitySearch /> component', () => {
     CitySearchWrapper.setState({
       query: 'Munich',
     });
-    // Simulation of input field value change - target is standard property of JavaScript event objects
-    // Formatted just like event object for the handler function
     const eventObject = { target: { value: 'Berlin' } };
     CitySearchWrapper.find('.city').simulate('change', eventObject);
     expect(CitySearchWrapper.state('query')).toBe('Berlin');
@@ -48,7 +43,6 @@ describe('<CitySearch /> component', () => {
       // +1 because "see all cities" will be added
       suggestions.length + 1
     );
-    // For loops better for testing than forEach because index can be accessed
     for (let i = 0; i < suggestions.length; i += 1) {
       expect(CitySearchWrapper.find('.suggestions li').at(i).text()).toBe(
         suggestions[i]
@@ -57,17 +51,14 @@ describe('<CitySearch /> component', () => {
   });
 
   test('suggestion list match the query when changed', () => {
-    // Emptying states
     CitySearchWrapper.setState({ query: '', suggestions: [] });
     CitySearchWrapper.find('.city').simulate('change', {
       target: { value: 'Berlin' },
     });
     const query = CitySearchWrapper.state('query');
     const filteredLocations = locations.filter((location) => {
-      // Question: The comparison operator shouldn't have to be used here, or does it? it would return the same array without it?
       return location.toUpperCase().indexOf(query.toUpperCase()) > -1;
     });
-    // toEqual instead of toBe because it is comparing complex data type (array)
     expect(CitySearchWrapper.state('suggestions')).toEqual(filteredLocations);
   });
 

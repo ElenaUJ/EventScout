@@ -1,37 +1,28 @@
-# Function configuration here
-
 service: auth-server
 
 provider:
   name: aws
   runtime: nodejs12.x
   region: ca-central-1
-  # optional, in seconds, default is 6 - sometimes not enough for "cold start"
   timeout: 60
   environment:
-    # Values can be found in config.js file, so CLIENT_ID etc can be accessed in handler.js file
     CLIENT_ID: ${file(config.json):CLIENT_ID}
     CLIENT_SECRET: ${file(config.json):CLIENT_SECRET}
     PROJECT_ID: ${file(config.json):PROJECT_ID}
     CALENDAR_ID: ${file(config.json):CALENDAR_ID}
 
-# Will contain all Lambda functions to be created in serverless "auth-server"
+# All Lambda functions to be created in serverless "auth-server"
 functions:
   getAuthURL:
-    # handler property points to handler.js file which contains exported getAuthURL function
-    # Lambda runs handler method whenever function ininvoked - when handler exits or returns response, it becomes available to handle other event
     handler: handler.getAuthURL
-    # events that will trigger getAuthURL Lambda function to run
     events:
       - http:
-          # This is how the http event will communicate with the getAuthURL function
           path: api/get-auth-url
           method: get
   getAccessToken:
     handler: handler.getAccessToken
     events:
       - http:
-          # {code} will be the authorization code that's received when the user authorizes the EventScout app (an URI parameter)
           path: api/token/{code}
           method: get
   getCalendarEvents:

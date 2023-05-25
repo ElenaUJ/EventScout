@@ -9,8 +9,6 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  // Is the environmen production and is a service worker supported in the current browser before registering it
-  // navigator refers to navigator interface, representing browser and operation system of user
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);

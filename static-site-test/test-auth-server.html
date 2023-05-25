@@ -98,7 +98,6 @@
             return response.json();
           })
           .then(function (json) {
-            // stringify method parameter 2 specifies what should be converted into JSON: null means everything should be included, third parameter is number of spaces used for indentation
             events.innerText = JSON.stringify(json, null, 2);
           });
       };

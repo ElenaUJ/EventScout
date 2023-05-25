@@ -18,8 +18,6 @@ class EventLocations extends Component {
       const number = events.filter(
         (event) => event.location === location
       ).length;
-      // Splitting the locations at the occurrence of comma followed by space, returning an array
-      // Then, shift() method gets the first array element, which is the city name
       const city = location.split(', ').shift();
       return { city, number };
     });

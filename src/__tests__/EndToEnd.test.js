@@ -40,7 +40,7 @@ describe('filter events by city', () => {
 });
 
 describe('show/hide event details', () => {
-  // Has to be placed outside the BeforeAll() function, otherwise is not going to fire!
+  // Has to be placed outside the BeforeAll() function, otherwise is not going to fire
   jest.setTimeout(30000);
   let browser;
   let page;
@@ -60,7 +60,6 @@ describe('show/hide event details', () => {
   });
 
   test('An event element is collapsed by default', async () => {
-    // page.$() selects an element on the page, returns first element found matching selector
     const eventDetails = await page.$('.event .details');
     expect(eventDetails).toBeNull();
   });

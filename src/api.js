@@ -1,17 +1,14 @@
-// To handle API calls
 import axios from 'axios';
 import { mockData } from './mock-data.js';
 import NProgress from 'nprogress';
 
 export const extractLocations = (events) => {
   var extractLocations = events.map((event) => event.location);
-  // ... spread operator spreads the contents of extractLocations into a new array
   var locations = [...new Set(extractLocations)];
   return locations;
 };
 
 export const checkToken = async (accessToken) => {
-  // Request to tokeninfo endpoint for OAuth2.0 protocol
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
@@ -23,19 +20,14 @@ export const checkToken = async (accessToken) => {
 
 // To remove the code from the URL once it's been accessed
 const removeQuery = () => {
-  // Checks if browser supports HTML5 history API and if the current URL has a path (and not just domain name), otherwise the app would break if the URL was replaced
+  // Checks if browser supports HTML5 history API and if the current URL has a path
   if (window.history.pushState && window.location.pathname) {
     var newurl =
       window.location.protocol +
       '//' +
       window.location.host +
       window.location.pathname;
-    // pushState method replaces current URL with the new URL (first two parameters are stateObject and title, which we don't need)
     window.history.pushState('', '', newurl);
-    // Question: But if the browser doesn't support the HTML5 history API, it wouldn't be able to use the pushState() method, and result in an error, correct?
-    // So why does this else statement exist then?
-    // To check the path (and why would no path exist?)?
-    // Then why check for the pushState method at all? I'm confused.
   } else {
     newurl = window.location.protocol + '//' + window.location.host;
     window.history.pushState('', '', newurl);
@@ -54,14 +46,12 @@ const getToken = async (code) => {
     })
     .catch((error) => error);
 
-  // If there is an access token, store it in local storage
   access_token && localStorage.setItem('access_token', access_token);
 
   return access_token;
 };
 
 export const getEvents = async () => {
-  // Start progress bar
   NProgress.start();
 
   if (window.location.href.startsWith('http://localhost')) {
@@ -69,7 +59,6 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  // Checks if user is offline, do it before checking for token
   if (!navigator.onLine) {
     const data = localStorage.getItem('lastEvents');
     NProgress.done();
@@ -98,11 +87,9 @@ export const getEvents = async () => {
 };
 
 export const getAccessToken = async () => {
-  // Checking whether user already has an access token
   const accessToken = localStorage.getItem('access_token');
   const tokenCheck = accessToken && (await checkToken(accessToken));
 
-  // If there is no token, check for authorization code
   if (!accessToken || tokenCheck.error) {
     await localStorage.removeItem('access_token');
     const searchParams = new URLSearchParams(window.location.search);
@@ -114,7 +101,6 @@ export const getAccessToken = async () => {
         'https://0mf3lzz5mc.execute-api.ca-central-1.amazonaws.com/dev/api/get-auth-url'
       );
       const { authUrl } = results.data;
-      // Redirection takes place here
       return (window.location.href = authUrl);
     }
 

@@ -13,7 +13,6 @@ class Event extends Component {
   }
 
   // Current time can only be set once when the component mounts, otherwise app will crash.
-  // Still have to adjust to display the adjusted time to the current tome zone for the events though.
   componentDidMount() {
     const event = this.props.event;
     const startDate = new Date(event.start.dateTime);

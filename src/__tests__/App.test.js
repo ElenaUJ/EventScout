@@ -7,6 +7,7 @@ import { NumberOfEvents } from '../NumberOfEvents.js';
 import { mockData } from '../mock-data.js';
 import { extractLocations, getEvents } from '../api.js';
 
+// Unit tests
 describe('<App /> component', () => {
   let AppWrapper;
   beforeAll(() => {
@@ -14,7 +15,6 @@ describe('<App /> component', () => {
   });
 
   test('render list of events', () => {
-    // Makes sure there is only one EventList component within the App component
     expect(AppWrapper.find(EventList)).toHaveLength(1);
   });
 
@@ -27,7 +27,7 @@ describe('<App /> component', () => {
   });
 });
 
-// Separating integration tests from unit tests (best practice)
+// Integration tests
 describe('<App /> integration', () => {
   // Mitigates  window.ResizeObserver is not a constructor error as suggested here: https://github.com/maslianok/react-resize-detector/issues/145
   const { ResizeObserver } = window;
@@ -44,14 +44,11 @@ describe('<App /> integration', () => {
     jest.restoreAllMocks();
   });
 
-  // Question: I tried to mount and unmount the AppWrapper in beforeAll/afterAll functions but for some tests it started throwing errors and I don't know why. Any idea?
   test('App passes "events" state as a prop to EventList', () => {
     const AppWrapper = mount(<App />);
     const AppEventsState = AppWrapper.state('events');
-    // Step necessary because if both App state and EventList prop could both be undefined
     expect(AppEventsState).not.toEqual(undefined);
     expect(AppWrapper.find(EventList).prop('events')).toEqual(AppEventsState);
-    // Important to unmount because otherwise tests will affect each other
     AppWrapper.unmount();
   });
 
@@ -69,16 +66,11 @@ describe('<App /> integration', () => {
     const AppWrapper = mount(<App />);
     const CitySearchWrapper = AppWrapper.find(CitySearch);
     const locations = extractLocations(mockData);
-    // CitySearch suggestions state to have all available cities (without see all cities)
     CitySearchWrapper.setState({ suggestions: locations });
     const suggestions = CitySearchWrapper.state('suggestions');
-    // Returning a random integer between 0 and suggestions.length -1
     const selectedIndex = Math.floor(Math.random() * suggestions.length);
     const selectedCity = suggestions[selectedIndex];
-    // Mimicking the click by calling instance() and then calling the component's function directly
-    // Await to pause code until function exectuion is completed
     await CitySearchWrapper.instance().handleItemClicked(selectedCity);
-    // Getting all events from API (or mock data) asynchronously
     const allEvents = await getEvents();
     const eventsToShow = allEvents.filter(
       (event) => event.location === selectedCity
