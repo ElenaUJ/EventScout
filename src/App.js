@@ -88,7 +88,11 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.showWelcomeScreen === undefined && navigator.onLine) {
+    if (
+      this.state.showWelcomeScreen === undefined &&
+      navigator.onLine &&
+      !window.location.href.startsWith('http://localhost')
+    ) {
       return (
         <div className="App">
           <header className="header">

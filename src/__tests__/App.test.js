@@ -29,6 +29,21 @@ describe('<App /> component', () => {
 
 // Separating integration tests from unit tests (best practice)
 describe('<App /> integration', () => {
+  // Mitigates  window.ResizeObserver is not a constructor error as suggested here: https://github.com/maslianok/react-resize-detector/issues/145
+  const { ResizeObserver } = window;
+  beforeEach(() => {
+    delete window.ResizeObserver;
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+  afterEach(() => {
+    window.ResizeObserver = ResizeObserver;
+    jest.restoreAllMocks();
+  });
+
   // Question: I tried to mount and unmount the AppWrapper in beforeAll/afterAll functions but for some tests it started throwing errors and I don't know why. Any idea?
   test('App passes "events" state as a prop to EventList', () => {
     const AppWrapper = mount(<App />);
