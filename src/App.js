@@ -48,7 +48,11 @@ class App extends Component {
   async componentDidMount() {
     this.mounted = true;
     // This is just for the localhost testing environment, because with the below code it wouldn't update the events state when mounted
-    if (window.location.href.startsWith('http://localhost') && this.mounted) {
+    if (
+      (window.location.href.startsWith('http://localhost') ||
+        !navigator.onLine) &&
+      this.mounted
+    ) {
       getEvents().then((events) => {
         this.setState({
           events: events,
@@ -74,20 +78,6 @@ class App extends Component {
             locations: extractLocations(events),
             eventCount: 32,
           });
-        }
-      });
-    } else if (!navigator.onLine && this.mounted) {
-      getEvents().then((events) => {
-        if (this.mounted) {
-          this.setState({
-            events: events,
-            locations: extractLocations(events),
-            eventCount: 32,
-          });
-          console.log('app is offline and events were set to ' + events);
-          console.log(
-            'also, locations were set to: ' + extractLocations(events)
-          );
         }
       });
     }
