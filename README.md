@@ -214,4 +214,4 @@ The EventScout App uses data stored in CareerFoundry's Google Calendar account t
 
 ### Google Verification
 
-The app is currently undergoing the verification process with Google to allow unrestricted public access.
+The app is currently undergoing the verification process with Google to allow unrestricted public access. During this verification process, users are advised to exercise caution. However, as the developer (ulbrichtjones@gmail.com), I assure you that the app is safe and trustworthy. Please feel free to trust the developer and proceed to use the app with confidence. If you have any concerns or questions, please don't hesitate to reach out to me directly at ulbrichtjones@gmail.com. Thank you for your understanding and support.
