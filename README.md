@@ -6,10 +6,10 @@
 - [Links](#links)
 - [Features, User Stories and BDD Scenarios](#features-user-stories-and-bdd-scenarios)
 - [Process](#process)
-  - [Testing](#testing)
-  - [Progressive Web App (PWA)](#progressive-web-app-pwa)
   - [Main Technologies and Dependencies](#main-technologies-and-dependencies)
+  - [Testing](#testing)
   - [Linting and Formatting](#linting-and-formatting)
+  - [Progressive Web App (PWA)](#progressive-web-app-pwa)
 - [Data Flow: Google Calendar API and Serverless Authorization](#data-flow-google-calendar-api-and-serverless-authorization)
   - [Google Verification](#google-verification)
 
@@ -136,19 +136,6 @@ The app is built using [test/behaviour-driven development](#features-user-storie
 
 ## Process
 
-### Testing
-
-This project follows a test-driven approach to ensure the quality and reliability of our application. We utilized a range of testing utilities, including:
-
-- Jest: A widely adopted JavaScript testing framework that provides a robust foundation for unit testing React components.
-- Enzyme: A JavaScript testing utility for React that facilitates testing of component behaviors and interactions.
-- Jest-Cucumber: A library that combines Jest and Cucumber, enabling the creation of behavior-driven development (BDD) tests with a natural language syntax.
-- Puppeteer: A Node.js library that facilitates end-to-end testing of web applications.
-
-### Progressive Web App (PWA)
-
-This app utilizes service workers to enable offline support and caching of app resources. With a manifest file and responsive design implementation, users can install and launch the app as a standalone application on compatible devices, while enjoying a seamless experience across different screen sizes and devices. Taken together, these features make EventScout fully compliant with PWA specification.
-
 ### Main Technologies and Dependencies
 
 **Technologies:**
@@ -162,6 +149,15 @@ This app utilizes service workers to enable offline support and caching of app r
 **Dependencies:**
 
 For a complete list of dependencies, please refer to the [package.json](./package.json) file.
+
+### Testing
+
+This project follows a test-driven approach to ensure the quality and reliability of our application. We utilized a range of testing utilities, including:
+
+- Jest: A widely adopted JavaScript testing framework that provides a robust foundation for unit testing React components.
+- Enzyme: A JavaScript testing utility for React that facilitates testing of component behaviors and interactions.
+- Jest-Cucumber: A library that combines Jest and Cucumber, enabling the creation of behavior-driven development (BDD) tests with a natural language syntax.
+- Puppeteer: A Node.js library that facilitates end-to-end testing of web applications.
 
 ### Linting and Formatting
 
@@ -177,6 +173,10 @@ For a complete list of dependencies, please refer to the [package.json](./packag
 ```
 
 - Prettier configuration: [View configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
+
+### Progressive Web App (PWA)
+
+This app utilizes service workers to enable offline support and caching of app resources. With a manifest file and responsive design implementation, users can install and launch the app as a standalone application on compatible devices, while enjoying a seamless experience across different screen sizes and devices. Taken together, these features make EventScout fully compliant with PWA specification.
 
 ## Data Flow: Google Calendar API and Serverless Authorization
 
