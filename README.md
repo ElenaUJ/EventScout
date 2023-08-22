@@ -8,8 +8,8 @@
 - [Process](#process)
   - [Testing](#testing)
   - [Progressive Web App (PWA)](#progressive-web-app-pwa)
-  - [Further Key Technologies](#further-key-technologies)
-  - [All Dependencies](#all-dependencies)
+  - [Main Technologies and Dependencies](#main-technologies-and-dependencies)
+  - [Linting and Formatting](#linting-and-formatting)
 - [Data Flow: Google Calendar API and Serverless Authorization](#data-flow-google-calendar-api-and-serverless-authorization)
   - [Google Verification](#google-verification)
 
@@ -149,7 +149,9 @@ This project follows a test-driven approach to ensure the quality and reliabilit
 
 This app utilizes service workers to enable offline support and caching of app resources. With a manifest file and responsive design implementation, users can install and launch the app as a standalone application on compatible devices, while enjoying a seamless experience across different screen sizes and devices. Taken together, these features make EventScout fully compliant with PWA specification.
 
-### Further Key Technologies
+### Main Technologies and Dependencies
+
+**Technologies:**
 
 - React: A JavaScript library for building user interfaces.
 - AWS Lambda: A serverless computing service.
@@ -157,45 +159,13 @@ This app utilizes service workers to enable offline support and caching of app r
 - Recharts: A charting library for React that provides customizable and interactive charts.
 - Atatus: An application performance management tool.
 
-### All Dependencies
+**Dependencies:**
 
-This project has the following dependencies:
+For a complete list of dependencies, please refer to the [package.json](./package.json) file.
 
-- "@testing-library/jest-dom": "^5.16.2",
-- "@testing-library/react": "^11.2.7",
-- "@testing-library/user-event": "^12.8.3",
-- "atatus-spa": "^4.5.0",
-- "axios": "^1.3.6",
-- "nprogress": "^0.2.0",
-- "react": "^17.0.2",
-- "react-dom": "^17.0.2",
-- "react-scripts": "5.0.1",
-- "recharts": "^2.6.2",
-- "web-vitals": "^2.1.4",
-- "workbox-background-sync": "^6.5.4",
-- "workbox-broadcast-update": "^6.5.4",
-- "workbox-cacheable-response": "^6.5.4",
-- "workbox-core": "^6.5.4",
-- "workbox-expiration": "^6.5.4",
-- "workbox-google-analytics": "^6.5.4",
-- "workbox-navigation-preload": "^6.5.4",
-- "workbox-precaching": "^6.5.4",
-- "workbox-range-requests": "^6.5.4",
-- "workbox-routing": "^6.5.4",
-- "workbox-strategies": "^6.5.4",
-- "workbox-streams": "^6.5.4"
+### Linting and Formatting
 
-And dev dependencies:
-
-- "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
-- "enzyme": "^3.11.0",
-- "gh-pages": "^5.0.0",
-- "jest-cucumber": "^3.0.1",
-- "puppeteer": "^18.1.0"
-
-Furthermore, it uses the following linting configuration:
-
-- ESLint rules:
+- ESLint Rules:
 
 ```json
 "eslintConfig": {
@@ -206,7 +176,7 @@ Furthermore, it uses the following linting configuration:
 }
 ```
 
-- [Prettier configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
+- Prettier configuration: [View configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
 
 ## Data Flow: Google Calendar API and Serverless Authorization
 
